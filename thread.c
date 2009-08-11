@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <string.h>
 #include <pthread.h>
+#include "sleep_profiler.h"
 
 #define ITEMS_PER_ALLOC 64
 
@@ -170,7 +171,7 @@ static void create_worker(void *(*func)(void *), void *arg) {
 
     pthread_attr_init(&attr);
 
-    if ((ret = pthread_create(&thread, &attr, func, arg)) != 0) {
+    if ((ret = pthread_create_hook(&thread, &attr, func, arg)) != 0) {
         fprintf(stderr, "Can't create thread: %s\n",
                 strerror(ret));
         exit(1);

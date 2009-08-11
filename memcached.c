@@ -48,6 +48,8 @@
 
 #include "cproxy.h"
 
+#include "sleep_profiler.h"
+
 /* FreeBSD 4.x doesn't have IOV_MAX exposed. */
 #ifndef IOV_MAX
 #if defined(__FreeBSD__) || defined(__APPLE__)
@@ -4022,6 +4024,8 @@ int main (int argc, char **argv) {
 
     /* handle SIGINT */
     signal(SIGINT, sig_handler);
+
+    setup_profiling_signal();
 
     /* init settings */
     settings_init();

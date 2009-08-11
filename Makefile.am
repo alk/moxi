@@ -27,7 +27,8 @@ moxi_SOURCES = memcached.c memcached.h \
                     cproxy_multiget.c \
                     cproxy_stats.c \
                     cproxy_front.c \
-                    matcher.c matcher.h
+                    matcher.c matcher.h \
+                    sleep_profiler.c sleep_profiler.h
 
 TESTS = check_util check_moxi check_moxi_agent check_work
 
