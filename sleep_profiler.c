@@ -16,6 +16,8 @@
 #include <pthread.h>
 #include <sys/syscall.h>
 
+#include <event.h>
+
 static inline
 pid_t gettid(void)
 {
@@ -47,6 +49,12 @@ void signal_handler(int __signo, siginfo_t *siginfo, void *ucontext)
 
 	int count = backtrace(backtrace_buf, BACKTRACE_SIZE);
 	backtrace_symbols_fd(backtrace_buf, count, dump_fd);
+	{
+		struct event_base *base = event_currently_sleeping();
+		if (base) {
+			event_diag_pending_events(base, dump_fd);
+		}
+	}
 	write(dump_fd, &zero, sizeof(zero));
 
 	errno = olderrno;
