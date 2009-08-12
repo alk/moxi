@@ -11,6 +11,8 @@
 #include "cproxy.h"
 #include "work.h"
 
+#include "fprintf_macro.h"
+
 // Internal declarations.
 //
 #define COMMAND_TOKEN 0

@@ -11,6 +11,8 @@
 #include "memcached.h"
 #include "cproxy.h"
 
+#include "fprintf_macro.h"
+
 static char *item_key(void *it);
 static int item_key_len(void *it);
 static int item_len(void *it);

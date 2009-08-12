@@ -11,6 +11,8 @@
 #include "cproxy.h"
 #include "work.h"
 
+#include "fprintf_macro.h"
+
 // Internal declarations.
 //
 #define KEY_TOKEN  1

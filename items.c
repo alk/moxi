@@ -13,6 +13,8 @@
 #include <time.h>
 #include <assert.h>
 
+#include "fprintf_macro.h"
+
 /* Forward Declarations */
 static void item_link_q(item *it);
 static void item_unlink_q(item *it);

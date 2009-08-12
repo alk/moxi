@@ -12,6 +12,8 @@
 #include "cproxy.h"
 #include "work.h"
 
+#include "fprintf_macro.h"
+
 #ifndef HAVE_HTONLL
 extern uint64_t ntohll(uint64_t);
 extern uint64_t htonll(uint64_t);

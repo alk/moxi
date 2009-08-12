@@ -11,6 +11,8 @@
 #include "cproxy.h"
 #include "agent.h"
 
+#include "fprintf_macro.h"
+
 static pthread_t check_thread_tid;
 static proxy_main *pmain = NULL;
 

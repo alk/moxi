@@ -12,6 +12,8 @@
 #include "work.h"
 #include "agent.h"
 
+#include "fprintf_macro.h"
+
 // Integration with libconflate.
 //
 static void update_ptd_config(void *data0, void *data1);

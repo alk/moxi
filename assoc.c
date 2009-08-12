@@ -25,6 +25,8 @@
 #include <assert.h>
 #include <pthread.h>
 
+#include "fprintf_macro.h"
+
 static pthread_cond_t maintenance_cond = PTHREAD_COND_INITIALIZER;
 
 

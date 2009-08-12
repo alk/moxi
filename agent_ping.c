@@ -12,6 +12,8 @@
 #include "work.h"
 #include "agent.h"
 
+#include "fprintf_macro.h"
+
 // From libmemcached.
 //
 memcached_return memcached_connect(memcached_server_st *ptr);

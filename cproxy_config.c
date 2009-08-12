@@ -14,6 +14,8 @@
 #include "cproxy.h"
 #include "work.h"
 
+#include "fprintf_macro.h"
+
 // From libmemcached.
 //
 uint32_t murmur_hash(const char *key, size_t length);

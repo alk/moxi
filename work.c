@@ -11,6 +11,8 @@
 #include <event.h>
 #include "work.h"
 
+#include "fprintf_macro.h"
+
 #undef WORK_DEBUG
 
 /** A work queue is a mechanism to allow thread-to-thread

@@ -12,6 +12,8 @@
 #include <pthread.h>
 #include "sleep_profiler.h"
 
+#include "fprintf_macro.h"
+
 #define ITEMS_PER_ALLOC 64
 
 /* An item in the connection queue. */
