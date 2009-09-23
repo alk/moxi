@@ -91,7 +91,7 @@ AC_PROG_INSTALL
 
 AC_ARG_ENABLE(dtrace,
   [AS_HELP_STRING([--enable-dtrace],[Enable dtrace probes])])
-if test "x$enable_dtrace" == "xyes"; then
+if test "x$enable_dtrace" = "xyes"; then
   AC_PATH_PROG([DTRACE], [dtrace], "no", [/usr/sbin:$PATH])
   if test "x$DTRACE" != "xno"; then
     AC_DEFINE([ENABLE_DTRACE],1,[Set to nonzero if you want to include DTRACE])
@@ -190,7 +190,7 @@ AC_SUBST(PROFILER_FLAGS)
 
 AC_ARG_ENABLE(64bit,
   [AS_HELP_STRING([--enable-64bit],[build 64bit version])])
-if test "x$enable_64bit" == "xyes"
+if test "x$enable_64bit" = "xyes"
 then
     org_cflags=$CFLAGS
     CFLAGS=-m64
@@ -234,7 +234,7 @@ AC_ARG_WITH(libstrophe,
                   [Defined if building with libstrophe XMPP client])
                 CPPFLAGS="-I$withval $CPPFLAGS"
                 LDFLAGS="$LDFLAGS -L$withval -L$withval/expat "
-                LIBS="$LIBS -lstrophe -lexpat -lssl -lresolv"
+                LIBS="$LIBS -lstrophe -lexpat -lssl"
                 usestrophe="yes"
               fi
             ])
@@ -329,12 +329,7 @@ AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(gethostbyname, nsl)
 AC_SEARCH_LIBS(umem_cache_create, umem)
 
-PKG_CHECK_MODULES([GLIB2], [ glib-2.0 >= 2.0.6 ])
-AC_SUBST(GLIB2)
 PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
-
-AC_SUBST(DEPS)
-AC_SUBST(DEPS)
 
 AC_HEADER_STDBOOL
 AC_C_CONST
@@ -390,7 +385,7 @@ AC_C_ENDIAN
 
 dnl Check whether the user's system supports pthread
 AC_SEARCH_LIBS(pthread_create, pthread)
-if test "x$ac_cv_search_pthread_create" == "xno"; then
+if test "x$ac_cv_search_pthread_create" = "xno"; then
   AC_MSG_ERROR([Can't enable threads without the POSIX thread library.])
 fi
 
@@ -484,8 +479,21 @@ then
   CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
 fi
 
+AC_ARG_VAR([CONFLATE_DB_PATH], [Directory for libconflate config database (default /var/lib/]AC_PACKAGE_NAME[)])
+if test "x$useconflate" = "xyes"; then
+  if test "x$CONFLATE_DB_PATH" = x; then
+    CONFLATE_DB_PATH=/var/lib/$PACKAGE
+  fi
+  AC_DEFINE_UNQUOTED([CONFLATE_DB_PATH], ["$CONFLATE_DB_PATH"], [directory for libconflate config database])
+fi
+
 
 AC_SEARCH_LIBS(memcached_create, memcached)
+
+AC_SEARCH_LIBS([res_query], resolv)
+AC_SEARCH_LIBS(res_9_query, resolv)
+dnl Linux needs resolv for the above, but doesn't seem to know it
+AC_SEARCH_LIBS(__res_query, resolv)
 
 LIBS="$LIBS -lm -lsqlite3 -lssl"
 

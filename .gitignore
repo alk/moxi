@@ -4,6 +4,11 @@
 *.gcno
 *.tcov
 .deps
+/GPATH
+/GRTAGS
+/GSYMS
+/GTAGS
+/ID
 INSTALL
 Makefile
 Makefile.in
@@ -53,4 +58,4 @@ libmemcached-*/libmemcached/*.lo
 libmemcached-*/libmemcached/*.la
 libmemcached-*/libmemcached/libmemcached_config.h
 .buildbot/*
-
+/t/check_moxi_agent.cfg
