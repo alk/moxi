@@ -1,12 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
-
-typedef struct { 
-    lua_State *lua;
-} MOXILUA;
+#include "moxi-lua.h"
 
 MOXILUA *moxiluanew (void) {
   int status;
@@ -27,7 +20,7 @@ MOXILUA *moxiluanew (void) {
   return moxilua;
 }
 
-int main(void) {
+/*int main(void) {
   int result;
   MOXILUA *moxilua= moxiluanew();
   result = lua_pcall(moxilua->lua, 0, LUA_MULTRET, 0);
@@ -38,3 +31,4 @@ int main(void) {
 
   exit(0);
 }
+*/

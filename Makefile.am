@@ -52,7 +52,7 @@ moxi_SOURCES += agent.h agent_config.c agent_ping.c agent_stats.c
 endif
 
 if BUILD_WITH_LUA
-moxi_SOURCES += moxi-lua.c 
+moxi_SOURCES += moxi-lua.c moxi-lua.h
 endif
 
 if BUILD_SOLARIS_PRIVS
