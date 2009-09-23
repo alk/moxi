@@ -26,3 +26,15 @@ MOXILUA *moxiluanew (void) {
   moxilua->lua = lua;
   return moxilua;
 }
+
+int main(void) {
+  int result;
+  MOXILUA *moxilua= moxiluanew();
+  result = lua_pcall(moxilua->lua, 0, LUA_MULTRET, 0);
+  if (result) {
+    fprintf(stderr, "Failed to run script: %s\n", lua_tostring(moxilua->lua, -1));
+    exit(1);
+  }
+
+  exit(0);
+}
