@@ -57,6 +57,10 @@ if BUILD_WITH_CONFLATE
 moxi_SOURCES += agent.h agent_config.c agent_ping.c agent_stats.c
 endif
 
+if BUILD_WITH_LUA
+moxi_SOURCES += moxi-lua.c 
+endif
+
 if BUILD_SOLARIS_PRIVS
 moxi_SOURCES += solaris_priv.c
 endif

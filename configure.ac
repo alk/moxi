@@ -111,6 +111,34 @@ if test "x$enable_dtrace" == "xyes"; then
     AC_MSG_ERROR([Need dtrace binary and OS support.])
   fi
 fi
+# Enable Lua extension
+uselua="no"
+AC_ARG_WITH(lua,
+  AC_HELP_STRING([--with-lua],
+	[build with Lua extension]),
+	[
+		if test "x$withval" != "no"
+			then
+			AC_DEFINE([HAVE_LUA_H],1,
+				[Defined if building with liblua for server extension])
+  			luaver=`lua -e 'v = string.gsub(_VERSION, ".* ", ""); print(v)'`
+  			MYCPPFLAGS="$MYCPPFLAGS -I/usr/include/lua$luaver -I/usr/local/include/lua$luaver"
+  			MYCPPFLAGS="$MYCPPFLAGS -I/usr/include/lua -I/usr/local/include/lua -D_MYLUA"
+  			MYCPPFLAGS="$MYCPPFLAGS -I/usr/include/lua -I/usr/local/include/lua -D_MYLUA"
+  			MYCPPFLAGS="$MYCPPFLAGS -I/usr/include/lua5.1 -D_MYLUA"
+  			MYLDFLAGS="$MYLDFLAGS -L/usr/include/lua$luaver -L/usr/local/include/lua$luaver"
+  			MYLDFLAGS="$MYLDFLAGS -L/usr/include/lua -L/usr/local/include/lua"
+  			CPATH="$CPATH:/usr/include/lua$luaver:/usr/local/include/lua$luaver"
+  			CPATH="$CPATH:/usr/include/lua:/usr/local/include/lua"
+  			MYCPPFLAGS="$CPATH -I/usr/include/lua5.1 -D_MYLUA"
+  			LIBRARY_PATH="$LIBRARY_PATH:/usr/lib/lua$luaver:/usr/local/lib/lua$luaver"
+  			LIBRARY_PATH="$LIBRARY_PATH:/usr/lib/lua:/usr/local/lib/lua"
+  			LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/include/lua$luaver:/usr/local/include/lua$luaver"
+  			LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/include/lua:/usr/local/include/lua"
+				uselua="yes"
+			fi
+			])
+AM_CONDITIONAL([BUILD_WITH_LUA],[test "$uselua" = "yes"])
 
 AM_CONDITIONAL([BUILD_DTRACE],[test "$build_dtrace" = "yes"])
 AM_CONDITIONAL([DTRACE_INSTRUMENT_OBJ],[test "$dtrace_instrument_obj" = "yes"])
@@ -193,6 +221,7 @@ AC_ARG_WITH(libconflate,
               fi
             ])
 AM_CONDITIONAL([BUILD_WITH_CONFLATE],[test "$useconflate" = "yes"])
+
 
 usestrophe="no"
 AC_ARG_WITH(libstrophe,
