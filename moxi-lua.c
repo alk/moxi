@@ -1,6 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#ifdef HAVE_LUA_H
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#endif
+
 #include "moxi-lua.h"
 
+#ifdef HAVE_LUA_H
 MOXILUA *moxiluanew (void) {
   int status;
   MOXILUA *moxilua;
@@ -19,6 +27,7 @@ MOXILUA *moxiluanew (void) {
   moxilua->lua = lua;
   return moxilua;
 }
+#endif
 
 /*int main(void) {
   int result;

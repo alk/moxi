@@ -111,36 +111,41 @@ if test "x$enable_dtrace" = "xyes"; then
     AC_MSG_ERROR([Need dtrace binary and OS support.])
   fi
 fi
+
 # Enable Lua extension
+dnl Check for lua
+AC_MSG_CHECKING(if with lua)
 uselua="no"
 AC_ARG_WITH(lua,
   AC_HELP_STRING([--with-lua],
 	[build with Lua extension]),
-	[
-		if test "x$withval" != "no"
-			then
-			AC_DEFINE([HAVE_LUA_H],1,
-				[Defined if building with liblua for server extension])
-  			luaver=`lua -e 'v = string.gsub(_VERSION, ".* ", ""); print(v)'`
-  			CPPFLAGS="$CPPFLAGS -I/usr/include/lua$luaver -I/usr/local/include/lua$luaver"
-  			CPPFLAGS="$CPPFLAGS -I/usr/include/lua -I/usr/local/include/lua -D_MYLUA"
-  			CPPFLAGS="$CPPFLAGS -I/usr/include/lua -I/usr/local/include/lua -D_MYLUA"
-  			CPPFLAGS="$CPPFLAGS -I/usr/include/lua5.1 -D_MYLUA"
-  			#LDFLAGS="$LDFLAGS -L/usr/include/lua$luaver -L/usr/local/include/lua$luaver"
-  			#LDFLAGS="$LDFLAGS -L/usr/include/lua -L/usr/local/include/lua"
-        LDFLAGS="$LDFLAGS -llua$luaver"
-  			#CPATH="$CPATH:/usr/include/lua$luaver:/usr/local/include/lua$luaver"
-  			#CPATH="$CPATH:/usr/include/lua:/usr/local/include/lua"
-  			CPPFLAGS="$CPPFLAGS $CPATH -I/usr/include/lua5.1 -D_MYLUA"
-        LIBS="$LIBS -llua$luaver"
-  			#LIBS="$LIBS:/usr/lib"
-  			#LIBS="$LIBS:/usr/lib/lua$luaver:/usr/local/lib/lua$luaver"
-  			#LIBS="$LIBS:/usr/lib/lua:/usr/local/lib/lua"
-  			#LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/include/lua$luaver:/usr/local/include/lua$luaver"
-  			#LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/include/lua:/usr/local/include/lua"
-				uselua="yes"
-			fi
+	[BUILD_WITH_LUA=$withval],[BUILD_WITH_LUA=yes])
+
+	if test "$BUILD_WITH_LUA" != "no"; then
+ 		AC_MSG_RESULT($BUILD_WITH_LUA)
+ 	# try pkgconfig
+ 	if test "$BUILD_WITH_LUA" = "yes"; then
+    	LUAPC=lua
+  else
+    	LUAPC=$BUILD_WITH_LUA
+  fi
+
+	PKG_CHECK_MODULES(LUA, $LUAPC >= 5.1, [
+		AC_DEFINE([HAVE_LUA], [1], [liblua])
+		AC_DEFINE([HAVE_LUA_H], [1], [lua.h])
+		],[
+		PKG_CHECK_MODULES(LUA, lua5.1 >= 5.1, [
+			AC_DEFINE([HAVE_LUA], [1], [liblua])
+			AC_DEFINE([HAVE_LUA_H], [1], [lua.h])
 			])
+		])
+
+	AC_SUBST(LUA_CFLAGS)
+	AC_SUBST(LUA_LIBS)
+fi
+
+
+# lua
 AM_CONDITIONAL([BUILD_WITH_LUA],[test "$uselua" = "yes"])
 
 AM_CONDITIONAL([BUILD_DTRACE],[test "$build_dtrace" = "yes"])
