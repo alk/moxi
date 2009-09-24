@@ -112,42 +112,6 @@ if test "x$enable_dtrace" = "xyes"; then
   fi
 fi
 
-# Enable Lua extension
-dnl Check for lua
-AC_MSG_CHECKING(if with lua)
-uselua="no"
-AC_ARG_WITH(lua,
-  AC_HELP_STRING([--with-lua],
-	[build with Lua extension]),
-	[BUILD_WITH_LUA=$withval],[BUILD_WITH_LUA=yes])
-
-	if test "$BUILD_WITH_LUA" != "no"; then
- 		AC_MSG_RESULT($BUILD_WITH_LUA)
- 	# try pkgconfig
- 	if test "$BUILD_WITH_LUA" = "yes"; then
-    	LUAPC=lua
-  else
-    	LUAPC=$BUILD_WITH_LUA
-  fi
-
-	PKG_CHECK_MODULES(LUA, $LUAPC >= 5.1, [
-		AC_DEFINE([HAVE_LUA], [1], [liblua])
-		AC_DEFINE([HAVE_LUA_H], [1], [lua.h])
-		],[
-		PKG_CHECK_MODULES(LUA, lua5.1 >= 5.1, [
-			AC_DEFINE([HAVE_LUA], [1], [liblua])
-			AC_DEFINE([HAVE_LUA_H], [1], [lua.h])
-			])
-		])
-
-	AC_SUBST(LUA_CFLAGS)
-	AC_SUBST(LUA_LIBS)
-fi
-
-
-# lua
-AM_CONDITIONAL([BUILD_WITH_LUA],[test "$uselua" = "yes"])
-
 AM_CONDITIONAL([BUILD_DTRACE],[test "$build_dtrace" = "yes"])
 AM_CONDITIONAL([DTRACE_INSTRUMENT_OBJ],[test "$dtrace_instrument_obj" = "yes"])
 
@@ -247,6 +211,48 @@ AC_ARG_WITH(libstrophe,
               fi
             ])
 AM_CONDITIONAL([BUILD_WITH_STROPHE],[test "$usestrophe" = "yes"])
+
+# Enable Lua extension
+dnl Check for lua
+AC_MSG_CHECKING(if with lua)
+uselua="no"
+AC_ARG_WITH(lua,
+  AC_HELP_STRING([--with-lua],
+	[build with Lua extension]),
+	[BUILD_WITH_LUA=$withval],[BUILD_WITH_LUA=yes])
+
+	if test "$BUILD_WITH_LUA" != "no"; then
+ 		AC_MSG_RESULT($BUILD_WITH_LUA)
+ 		# try pkgconfig
+ 		if test "$BUILD_WITH_LUA" = "yes"; then
+    		LUAPC=lua
+  	else
+    		LUAPC=$BUILD_WITH_LUA
+  	fi
+
+		PKG_CHECK_MODULES(LUA, $LUAPC >= 5.1,
+			[ AC_DEFINE([HAVE_LUA], [1], [liblua])
+				AC_DEFINE([HAVE_LUA_H], [1], [lua.h])
+			],
+			[ PKG_CHECK_MODULES(LUA, lua5.1 >= 5.1,
+				[ AC_DEFINE([HAVE_LUA], [1], [liblua])
+					AC_DEFINE([HAVE_LUA_H], [1], [lua.h]) ]
+				)
+			]
+			)
+
+		AC_SUBST(LUA_CFLAGS)
+		AC_SUBST(LUA_LIBS)
+
+		CFLAGS="$LUA_CFLAGS $CFLAGS"
+		LDFLAGS="$LDFLAGS $LUA_LIBS"
+		LIBS="$LIBS $LUA_LIBS"
+
+	fi
+
+# lua
+AM_CONDITIONAL([BUILD_WITH_LUA],[test "$uselua" = "yes"])
+
 
 trylibeventdir=""
 AC_ARG_WITH(libevent,

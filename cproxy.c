@@ -13,8 +13,10 @@
 #include "cproxy.h"
 #include "work.h"
 
-//#include "moxi-lua.h"
-
+/*#ifdef HAVE_LUA_H
+#include "moxi-lua.h"
+#endif
+*/
 
 // From libmemcached.
 //
@@ -131,6 +133,10 @@ proxy *cproxy_create(char    *name,
         p->listening_failed = 0;
 
         p->next = NULL;
+
+#ifdef HAVE_LUA_H
+        /*p->lua= moxiluanew();*/
+#endif
 
         pthread_mutex_init(&p->proxy_lock, NULL);
 

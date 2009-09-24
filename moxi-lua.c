@@ -1,15 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef HAVE_LUA_H
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
+#include "moxi-lua.h"
 #endif
 
-#include "moxi-lua.h"
-
 #ifdef HAVE_LUA_H
-MOXILUA *moxiluanew (void) {
+MOXILUA* moxiluanew(void) {
   int status;
   MOXILUA *moxilua;
   lua_State *lua = luaL_newstate();

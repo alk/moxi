@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #ifdef HAVE_LUA_H
 #include <lua.h>
-MOXILUA *moxiluanew (void);
+#include <lualib.h>
+#include <lauxlib.h>
 
 typedef struct {
     lua_State *lua;
 } MOXILUA;
+
+MOXILUA* moxiluanew(void);
 #endif

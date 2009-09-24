@@ -8,6 +8,10 @@
 #include "work.h"
 #include "matcher.h"
 
+#ifdef HAVE_LUA_H
+#include "moxi-lua.h"
+#endif
+
 int cproxy_init(char *cfg_str,
                 char *behavior_str,
                 int nthreads,
@@ -190,6 +194,10 @@ struct proxy {
 
     proxy_td *thread_data;     // Immutable.
     int       thread_data_num; // Immutable.
+#ifdef HAVE_LUA_H
+    MOXILUA *lua;
+#endif
+
 };
 
 struct proxy_stats {
