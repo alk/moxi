@@ -372,7 +372,7 @@ START_TEST(test_cmd_stats_gathering)
 
   ck_assert(memcmp(&(proxy->thread_data[0].stats), &(proxy->thread_data[1].stats), sizeof(proxy->thread_data[1].stats)) != 0);
 
-  on_conflate_get_stats(pmain, NULL, "get-stats", true, NULL, (conflate_form_result *)(intptr_t)gathering_conflate_add_field);
+  on_conflate_get_stats(pmain, NULL, "get-stats", true, NULL, (conflate_form_result *)(intptr_t)gathering_conflate_add_field, NULL);
 
   ck_assert(collect_memcached_stats_for_proxy_called);
 

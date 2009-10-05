@@ -182,7 +182,7 @@ enum conflate_mgmt_cb_result on_conflate_get_stats(void *userdata,
                                                    const char *cmd,
                                                    bool direct,
                                                    kvpair_t *form,
-                                                   conflate_form_result *r)
+                                                   conflate_form_result *r, void *dummy)
 {
     assert(STATS_CMD_last      == sizeof(cmd_names) / sizeof(char *));
     assert(STATS_CMD_TYPE_last == sizeof(cmd_type_names) / sizeof(char *));
@@ -1002,7 +1002,7 @@ enum conflate_mgmt_cb_result on_conflate_reset_stats(void *userdata,
                                                      const char *cmd,
                                                      bool direct,
                                                      kvpair_t *form,
-                                                     conflate_form_result *r) {
+                                                     conflate_form_result *r, void *dummy) {
     proxy_main *m = userdata;
     assert(m);
     assert(m->nthreads > 1);

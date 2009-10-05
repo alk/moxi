@@ -64,11 +64,11 @@ static void agent_logger(void *userdata,
 static void init_extensions(void)
 {
     conflate_register_mgmt_cb("client_stats", "Retrieve stats from moxi",
-                              on_conflate_get_stats);
+                              on_conflate_get_stats, NULL);
     conflate_register_mgmt_cb("reset_stats", "Reset moxi stats",
-                              on_conflate_reset_stats);
+                              on_conflate_reset_stats, NULL);
     conflate_register_mgmt_cb("ping_test", "Perform a ping test",
-                              on_conflate_ping_test);
+                              on_conflate_ping_test, NULL);
 }
 
 /** The cfg_str looks like...

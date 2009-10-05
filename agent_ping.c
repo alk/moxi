@@ -82,7 +82,7 @@ enum conflate_mgmt_cb_result on_conflate_ping_test(void *userdata,
                                                    const char *cmd,
                                                    bool direct,
                                                    kvpair_t *form,
-                                                   conflate_form_result *r)
+                                                   conflate_form_result *r, void *dummy)
                            {
     assert(userdata);
 

@@ -23,19 +23,19 @@ enum conflate_mgmt_cb_result on_conflate_get_stats(void *opaque,
                                                    const char *cmd,
                                                    bool direct,
                                                    kvpair_t *form,
-                                                   conflate_form_result *);
+                                                   conflate_form_result *, void *);
 enum conflate_mgmt_cb_result on_conflate_reset_stats(void *opaque,
                                                      conflate_handle_t *handle,
                                                      const char *cmd,
                                                      bool direct,
                                                      kvpair_t *form,
-                                                     conflate_form_result *);
+                                                     conflate_form_result *, void *);
 enum conflate_mgmt_cb_result on_conflate_ping_test(void *opaque,
                                                    conflate_handle_t *handle,
                                                    const char *cmd,
                                                    bool direct,
                                                    kvpair_t *form,
-                                                   conflate_form_result *);
+                                                   conflate_form_result *, void *);
 
 void cproxy_on_new_pool(proxy_main *m,
                         char *name, int port,
