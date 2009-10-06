@@ -153,6 +153,10 @@ struct proxy_main {
     uint64_t stat_proxy_start_fails;
     uint64_t stat_proxy_existings;
     uint64_t stat_proxy_shutdowns;
+
+#ifdef HAVE_LUA_H
+    lua_State *luastate;
+#endif
 };
 
 /* Owned by main listener thread.

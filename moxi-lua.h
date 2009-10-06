@@ -10,4 +10,8 @@ typedef struct {
 } MOXILUA;
 
 MOXILUA* moxiluanew(void);
+
+struct proxy_main;
+void moxilua_init_proxy_main(struct proxy_main *m);
+
 #endif

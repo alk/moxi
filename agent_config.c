@@ -272,6 +272,8 @@ proxy_main *cproxy_init_agent_start(char *jid,
         config.new_config = on_conflate_new_config;
         config.log        = agent_logger;
 
+        moxilua_init_proxy_main(m);
+
         if (start_conflate(config)) {
             if (settings.verbose > 2) {
                 fprintf(stderr, "cproxy_init done\n");
