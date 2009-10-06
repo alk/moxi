@@ -4,6 +4,9 @@
 #define AGENT_H
 
 #include <conflate.h>
+#ifdef REDIRECTS_FOR_MOCKS
+#include "redirects.h"
+#endif
 
 int cproxy_init_agent(char *cfg_str,
                       proxy_behavior behavior,
@@ -33,8 +36,6 @@ enum conflate_mgmt_cb_result on_conflate_ping_test(void *opaque,
                                                    bool direct,
                                                    kvpair_t *form,
                                                    conflate_form_result *);
-
-void cproxy_on_new_config(void *data0, void *data1);
 
 void cproxy_on_new_pool(proxy_main *m,
                         char *name, int port,

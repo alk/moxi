@@ -1,7 +1,12 @@
 AUTOMAKE_OPTIONS = foreign
 
 bin_PROGRAMS = moxi
-noinst_PROGRAMS = moxi-debug sizes testapp
+noinst_PROGRAMS = moxi-debug sizes testapp timedrun
+
+## INCLUDES is apparently not previously set, if you set it
+##  change this
+INCLUDES = $(CONFLATE_CFLAGS)
+LIBS += $(CONFLATE_LIBS)
 
 BUILT_SOURCES =
 
@@ -18,6 +23,7 @@ moxi_SOURCES = memcached.c memcached.h \
                     util.c util.h \
                     trace.h cache.h \
                     work.c work.h \
+                    redirects.h \
                     cproxy.c cproxy.h \
                     cproxy_config.c \
                     cproxy_protocol.c \
@@ -28,12 +34,21 @@ moxi_SOURCES = memcached.c memcached.h \
                     cproxy_front.c \
                     matcher.c matcher.h
 
-TESTS = check_util check_moxi check_moxi_agent check_work
+timedrun_SOURCES = timedrun.c
+
+TESTS = check_util check_moxi check_work
+if BUILD_WITH_CONFLATE
+TESTS += check_moxi_agent
+endif
 
 check_PROGRAMS = check_util \
                  check_moxi \
-                 check_moxi_agent \
                  check_work
+
+if BUILD_WITH_CONFLATE
+check_PROGRAMS += check_moxi_agent
+endif
+
 
 test_moxi:
 	./t/moxi_all.pl
@@ -60,8 +75,7 @@ moxi_SOURCES += solaris_priv.c
 endif
 
 moxi_debug_SOURCES = $(moxi_SOURCES)
-moxi_debug_CPPFLAGS = -I$(top_srcdir)/libmemcached-0.30 \
-                      -I$(top_srcdir)/../libstrophe
+moxi_debug_CPPFLAGS = -I$(top_srcdir)/libmemcached-0.30 -DCONFLATE_DB_PATH=\"$(CONFLATE_DB_PATH)\"
 moxi_CPPFLAGS = -DNDEBUG $(moxi_debug_CPPFLAGS)
 moxi_debug_LDADD = @PROFILER_LDFLAGS@ \
                    libmemcached-0.30/libmemcached/libmemcached.la
@@ -97,9 +111,10 @@ memcached_dtrace.o: $(moxi_OBJECTS)
 memcached_debug_dtrace.o: $(moxi_debug_OBJECTS)
 	$(DTRACE) $(DTRACEFLAGS) -G -o memcached_debug_dtrace.o -s ${srcdir}/memcached_dtrace.d $(moxi_debug_OBJECTS)
 
-SUBDIRS = doc libmemcached-0.30/libmemcached
+SUBDIRS = doc libmemcached-0.30/libmemcached $(MAYBE_LIBCONFLATE)
+DIST_SUBDIRS = doc libmemcached-0.30/libmemcached $(MAYBE_LIBCONFLATE)
 DIST_DIRS = scripts
-EXTRA_DIST = doc scripts TODO t memcached.spec memcached_dtrace.d version.m4 libmemcached-0.30 protocol_binary.h patches
+EXTRA_DIST = doc scripts TODO t memcached.spec memcached_dtrace.d version.m4 libmemcached-0.30 protocol_binary.h patches debian
 
 MOSTLYCLEANFILES = *.gcov *.gcno *.gcda *.tcov
 
@@ -135,11 +150,15 @@ docs:
 	(cat Doxyfile ; echo "PROJECT_NUMBER=`cat version.num`") | doxygen -
 
 dist-hook:
+	@if [ "x$(MAYBE_LIBCONFLATE)" = x ]; then \
+	  echo "WARNING! WARNING! WARNING!: libconflate WILL NOT be bundled in distribution archive!"; \
+	  echo "WARNING! WARNING! WARNING!: you should do 'make dist' after configuring with bundled libconflate (and libstrophe too)!!!!!"; \
+	fi
 	rm -rf $(distdir)/libmemcached-0.30/libmemcached/{.deps,.libs,*.lo,*.o,Makefile,*.la,libmemcached_config.h,stamp-h[0-9]}
 	rm -f $(distdir)/*/*~ $(distdir)/t/lib/*~ $(distdir)/*~
 
 install-data-hook:
-	$(MKDIR_P) $(CONFLATE_DB_PATH)
+	$(mkdir_p) $(DESTDIR)$(CONFLATE_DB_PATH)
 
 check_work_SOURCES = check_work.c $(moxi_debug_SOURCES)
 check_work_CFLAGS = @CHECK_CFLAGS@ $(moxi_debug_CPPFLAGS) -DMAIN_CHECK
@@ -149,9 +168,22 @@ check_moxi_SOURCES = check_moxi.c $(moxi_debug_SOURCES)
 check_moxi_CFLAGS = @CHECK_CFLAGS@ $(moxi_debug_CPPFLAGS) -DMAIN_CHECK
 check_moxi_LDADD = @CHECK_LIBS@ $(moxi_debug_LDADD)
 
-check_moxi_agent_SOURCES = check_moxi_agent.c $(moxi_debug_SOURCES)
-check_moxi_agent_CFLAGS = @CHECK_CFLAGS@ $(moxi_debug_CPPFLAGS) -DMAIN_CHECK
+if BUILD_WITH_CONFLATE
+check_moxi_agent_SOURCES = check_moxi_agent.c redirects.c $(moxi_debug_SOURCES)
+check_moxi_agent_CFLAGS = @CHECK_CFLAGS@ $(moxi_debug_CPPFLAGS) -DMAIN_CHECK -DREDIRECTS_FOR_MOCKS
 check_moxi_agent_LDADD = @CHECK_LIBS@ $(moxi_debug_LDADD)
+endif
 
 check-syntax:
-	$(COMPILE) -o /dev/null -S ${CHK_SOURCES}
+	$(COMPILE) $(moxi_debug_CPPFLAGS) -o /dev/null -S ${CHK_SOURCES}
+
+fc_rpm_inner:
+	-rm $(rpmtop)/SRPMS/moxi-$(VERSION)*.rpm
+	-rm $(rpmtop)/RPMS/*/moxi-$(VERSION)*.rpm
+	cp moxi-$(VERSION).tar.gz $(rpmtop)/SOURCES/
+	rpmbuild -ba scripts/rpm/moxi.spec
+	cp $(rpmtop)/SRPMS/moxi-$(VERSION)*.rpm .
+	cp $(rpmtop)/RPMS/*/moxi{,-debuginfo}-$(VERSION)*.rpm .
+
+fc_rpm: dist
+	rpmtop=`rpm --eval "%{_topdir}"` $(MAKE) fc_rpm_inner

@@ -8,8 +8,6 @@
 #include "memcached.h"
 #include "cproxy.h"
 
-int main_check(int argc, char **argv);
-
 #define s_len(str) (str), strlen(str)
 
 START_TEST(test_skey)
@@ -459,16 +457,12 @@ static Suite* moxi_suite(void)
     return s;
 }
 
-/**
- * Run this like...
- *  check_moxi -vvv -p 11211
- */
-int main_check(int argc, char **argv)
+int main(int argc, char **argv)
 {
     int number_failed;
     Suite *s = moxi_suite();
     SRunner *sr = srunner_create(s);
-    srunner_run_all(sr, CK_NORMAL);
+    srunner_run_all(sr, CK_ENV);
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);
     int rv = (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;

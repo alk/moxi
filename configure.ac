@@ -86,7 +86,6 @@ if test "$ICC" = "no"; then
    AC_PROG_CC_C99
 fi
 
-AM_PROG_CC_C_O
 AC_PROG_INSTALL
 
 AC_ARG_ENABLE(dtrace,
@@ -140,10 +139,11 @@ AC_ARG_ENABLE(coverage,
 if test "x$enable_coverage" != "xno"; then
    if test "$ICC" = "yes"
    then
-      :
       dnl ICC trying to be gcc, but not well
+      CFLAGS="$CFLAGS -pthread"
    elif test "$GCC" = "yes"
    then
+      CFLAGS="$CFLAGS -pthread"
       AC_PATH_PROG([PROFILER], [gcov], "no", [$PATH])
       if test "x$PROFILER" != "xno"; then
          PROFILER_FLAGS="-fprofile-arcs -ftest-coverage"
@@ -177,40 +177,53 @@ return sizeof(void*) == 8 ? 0 : 1;
     ])
 fi
 
-useconflate="no"
-AC_ARG_WITH(libconflate,
-            AS_HELP_STRING([--with-libconflate=PATH],
-            [build with libconflate xmpp management]),
-            [
-              if test "x$withval" != "xno"
-                then
-                AC_DEFINE([HAVE_CONFLATE_H], 1,
-                  [Defined if building with libconflate XMPP management])
-                CPPFLAGS="-I$withval $CPPFLAGS"
-                LDFLAGS="$LDFLAGS -L$withval "
-                LIBS="$LIBS -lconflate"
-                useconflate="yes"
-              fi
-            ])
-AM_CONDITIONAL([BUILD_WITH_CONFLATE],[test "$useconflate" = "yes"])
+PKG_PROG_PKG_CONFIG
 
-
-usestrophe="no"
-AC_ARG_WITH(libstrophe,
-            AS_HELP_STRING([--with-libstrophe=PATH],
-            [build with libstrophe xmpp libs]),
-            [
-              if test "x$withval" != "xno"
-                then
-                AC_DEFINE([HAVE_STROPHE_H], 1,
-                  [Defined if building with libstrophe XMPP client])
-                CPPFLAGS="-I$withval $CPPFLAGS"
-                LDFLAGS="$LDFLAGS -L$withval -L$withval/expat "
-                LIBS="$LIBS -lstrophe -lexpat -lssl"
-                usestrophe="yes"
-              fi
-            ])
-AM_CONDITIONAL([BUILD_WITH_STROPHE],[test "$usestrophe" = "yes"])
+AC_ARG_WITH(libconflate, [AS_HELP_STRING([--with-libconflate], [build with libconflate xmpp management @<:@default=check@:>@])],
+                           [], [with_libconflate=check])
+CONFLATE_CFLAGS=
+CONFLATE_LIBS=
+AC_SUBST(CONFLATE_CFLAGS)
+AC_SUBST(CONFLATE_LIBS)
+if test "x$with_libconflate" == xno; then
+  echo "libconflate support is manually disabled"
+elif test "x$with_libconflate" = xbundled; then
+  conflate_pkg_not_found=yes
+else
+  PKG_CHECK_MODULES([CONFLATE], [libconflate], [
+       BUILD_WITH_CONFLATE=yes
+       AC_DEFINE([HAVE_CONFLATE_H], 1,
+               [Defined if building with libconflate XMPP management])
+    ], [
+       conflate_pkg_not_found=yes
+    ])
+fi
+if test "x$conflate_pkg_not_found" = "xyes"; then
+  if test -f "$srcdir/libconflate/configure"; then
+    if test "x$with_libconflate" = xbundled; then
+      AC_MSG_NOTICE([forced use of bundled libconflate])
+    else
+      AC_MSG_NOTICE([will use bundled libconflate])
+    fi
+    AC_CONFIG_SUBDIRS([libconflate])
+    CONFLATE_LIBS="-Llibconflate -lconflate"
+    CONFLATE_CFLAGS="-Ilibconflate"
+    BUILD_WITH_CONFLATE=yes
+    AC_DEFINE([HAVE_CONFLATE_H], 1,
+              [Defined if building with libconflate XMPP management])
+    AC_SUBST([MAYBE_LIBCONFLATE], [libconflate])
+  else
+    if test "x$with_libconflate" = xbundled; then
+      AC_MSG_FAILURE([build with bundled libconflate is requested, but libconflate/configure is missing])
+    fi
+    if test "x$with_libconflate" != xcheck; then
+      AC_MSG_FAILURE([--with-libconflate was given, but pkg-config package for libconflate is missing])
+    fi
+    BUILD_WITH_CONFLATE=no
+    AC_MSG_NOTICE([support for libconflate XMPP management will be disabled])
+  fi
+fi
+AM_CONDITIONAL([BUILD_WITH_CONFLATE], [test "x$BUILD_WITH_CONFLATE" = xyes])
 
 # Enable Lua extension
 dnl Check for lua
@@ -424,10 +437,10 @@ AC_DEFUN([AC_C_ALIGNMENT],
   ],[
     ac_cv_c_alignment=none
   ],[
-    ac_cv_c_endian=need
+    ac_cv_c_alignment=need
   ])
 ])
-if test $ac_cv_c_endian = need; then
+if test $ac_cv_c_alignment = need; then
   AC_DEFINE(NEED_ALIGN, 1, [Machine need alignment])
 fi
 ])
@@ -479,7 +492,7 @@ then
    AC_DEFINE([_GNU_SOURCE],[1],[find sigignore on Linux])
 elif test "$GCC" = "yes"
 then
-  GCC_VERSION=`gcc -dumpversion`
+  GCC_VERSION=`$CC -dumpversion`
   CFLAGS="$CFLAGS -Wall -Werror -pedantic -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls"
   case $GCC_VERSION in
     4.4.*)
@@ -493,24 +506,17 @@ then
   CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
 fi
 
-AC_ARG_VAR([CONFLATE_DB_PATH], [Directory for libconflate config database (default /var/lib/]AC_PACKAGE_NAME[)])
-if test "x$useconflate" = "xyes"; then
+AC_ARG_VAR([CONFLATE_DB_PATH], [Directory for libconflate config database (default $prefix/var/lib/]AC_PACKAGE_NAME[)])
+if test "x$BUILD_WITH_CONFLATE" = "xyes"; then
   if test "x$CONFLATE_DB_PATH" = x; then
-    CONFLATE_DB_PATH=/var/lib/$PACKAGE
+    CONFLATE_DB_PATH="$localstatedir/lib/$PACKAGE"
   fi
-  AC_DEFINE_UNQUOTED([CONFLATE_DB_PATH], ["$CONFLATE_DB_PATH"], [directory for libconflate config database])
 fi
 
+AC_SUBST([DATE], [`LANG=C date -R`])
 
-AC_SEARCH_LIBS(memcached_create, memcached)
+LIBS="$LIBS -lm"
 
-AC_SEARCH_LIBS([res_query], resolv)
-AC_SEARCH_LIBS(res_9_query, resolv)
-dnl Linux needs resolv for the above, but doesn't seem to know it
-AC_SEARCH_LIBS(__res_query, resolv)
-
-LIBS="$LIBS -lm -lsqlite3 -lssl"
-
-AC_CONFIG_FILES(Makefile doc/Makefile libmemcached-0.30/libmemcached/Makefile)
+AC_CONFIG_FILES(Makefile doc/Makefile libmemcached-0.30/libmemcached/Makefile debian/changelog scripts/rpm/moxi.spec)
 AC_OUTPUT
 

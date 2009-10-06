@@ -32,14 +32,19 @@ go('fanout', 'binary');
 # Fork moxi-debug for moxi-specific testing.
 #
 my $childargs = "-z 11333=localhost:11311 -p 0 -U 0 -v -t 1 -Z downstream_max=1";
+if ($< == 0) {
+   $childargs .= " -u root";
+}
 my $childpid  = fork();
 
 unless ($childpid) {
+    setpgrp();
     exec "$exe $childargs";
     exit; # never gets here.
 }
+setpgrp($childpid, $childpid);
 
 system("python ./t/moxi_mock.py");
 
-kill 2, $childpid;
+kill 2, -$childpid;
 
