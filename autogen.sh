@@ -20,7 +20,7 @@ libtoolize --automake
 fi
 
 echo "aclocal..."
-ACLOCAL=`which aclocal-1.10 || which aclocal-1.9 || which aclocal19 || which aclocal-1.7 || which aclocal17 || which aclocal-1.5 || which aclocal15`
+ACLOCAL=`which aclocal-1.11 || which aclocal-1.10 || which aclocal-1.9 || which aclocal19 || which aclocal-1.7 || which aclocal17 || which aclocal-1.5 || which aclocal15`
 ${ACLOCAL:-aclocal} $ACLOCALFLAGS || exit 1
 
 echo "autoheader..."
@@ -28,7 +28,7 @@ AUTOHEADER=${AUTOHEADER:-autoheader}
 $AUTOHEADER || exit 1
 
 echo "automake..."
-AUTOMAKE=`which automake-1.10 || which automake-1.9 || which automake-1.7`
+AUTOMAKE=`which automake-1.11 || which automake-1.10 || which automake-1.9 || which automake-1.7`
 $AUTOMAKE --foreign --add-missing || automake --foreign --add-missing || exit 1
 
 echo "autoconf..."
