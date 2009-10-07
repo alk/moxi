@@ -32,6 +32,8 @@ extern char cproxy_hostname[300]; // Immutable after init.
 
 // -------------------------------
 
+#ifndef SWIG
+
 typedef struct {
     char *(*item_key)(void *it);
     int   (*item_key_len)(void *it);
@@ -45,6 +47,8 @@ typedef struct {
     uint32_t (*item_get_exptime)(void *it);
     void     (*item_set_exptime)(void *it, uint32_t exptime);
 } mcache_funcs;
+
+#endif // !SWIG
 
 extern mcache_funcs mcache_item_funcs;
 extern mcache_funcs mcache_key_stats_funcs;
@@ -356,6 +360,7 @@ struct downstream {
 
     downstream *next;         // To track reserved/free lists.
 
+#ifndef SWIG
     // Immutable function pointer that determines how we propagate
     // an upstream request to a downstream.  Eg, ascii vs binary,
     // replicating or not, etc.
@@ -365,6 +370,7 @@ struct downstream {
     // For example, some downstream conn's are ascii, some binary.
     //
     bool (*propagate)(downstream *d);
+#endif // !SWIG
 
     conn **downstream_conns;  // Wraps the fd's of mst with conns.
     int    downstream_used;   // Number of in-use downstream conns, might
@@ -452,7 +458,7 @@ void cproxy_process_a2a_downstream(conn *c, char *line);
 void cproxy_process_a2a_downstream_nread(conn *c);
 
 bool cproxy_forward_a2a_downstream(downstream *d);
-bool cproxy_forward_a2a_multiget_downstream(downstream *d, conn *uc);
+//bool cproxy_forward_a2a_multiget_downstream(downstream *d, conn *uc);
 bool cproxy_forward_a2a_simple_downstream(downstream *d, char *command,
                                           conn *uc);
 bool cproxy_forward_a2a_item_downstream(downstream *d, short cmd,
@@ -468,7 +474,7 @@ void cproxy_process_a2b_downstream(conn *c);
 void cproxy_process_a2b_downstream_nread(conn *c);
 
 bool cproxy_forward_a2b_downstream(downstream *d);
-bool cproxy_forward_a2b_multiget_downstream(downstream *d, conn *uc);
+//bool cproxy_forward_a2b_multiget_downstream(downstream *d, conn *uc);
 bool cproxy_forward_a2b_simple_downstream(downstream *d, char *command,
                                           conn *uc);
 bool cproxy_forward_a2b_item_downstream(downstream *d, short cmd,

@@ -342,6 +342,7 @@ typedef struct {
 typedef struct conn conn;
 typedef struct conn_funcs conn_funcs;
 
+#ifndef SWIG
 struct conn_funcs {
     /* Function pointers so that drive_machine loop is reusable. */
     void (*conn_init)(conn *c);
@@ -356,6 +357,7 @@ struct conn_funcs {
     /* PROTOCOL_BINARY_REQ/RES */
     uint8_t conn_binary_command_magic;
 };
+#endif
 
 struct conn {
     int    sfd;
@@ -531,7 +533,7 @@ void thread_init(int nthreads, struct event_base *main_base);
 int  thread_index(pthread_t thread_id);
 LIBEVENT_THREAD *thread_by_index(int i);
 
-int  dispatch_event_add(int thread, conn *c);
+//int  dispatch_event_add(int thread, conn *c);
 
 void dispatch_conn_new(int sfd, enum conn_states init_state,
                        int event_flags,
@@ -595,5 +597,7 @@ extern void drop_privileges(void);
 #define likely(x)       __builtin_expect((x),1)
 #define unlikely(x)     __builtin_expect((x),0)
 
+#ifndef SWIG
 // used by unit tests
 void start_main(char *arg0, ...);
+#endif

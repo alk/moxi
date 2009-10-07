@@ -43,9 +43,11 @@ end
 --               end, "crl")
 
 debugcall(function ()
+             moxi.swig = moxi.__init("swig")
              moxi.register_conflate_callback("luacall", "test command implemented in lua",
                                              function ()
                                                 print "test message"
+                                                print("msec_current_time is " .. moxi.swig.msec_current_time)
                                                 error "asd"
                                              end)
           end)

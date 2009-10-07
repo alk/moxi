@@ -67,7 +67,7 @@ moxi_SOURCES += agent.h agent_config.c agent_ping.c agent_stats.c
 endif
 
 if BUILD_WITH_LUA
-moxi_SOURCES += moxi-lua.c moxi-lua.h
+moxi_SOURCES += moxi-lua.c moxi-lua.h moxiswig_wrap.c
 endif
 
 if BUILD_SOLARIS_PRIVS
@@ -114,9 +114,13 @@ memcached_debug_dtrace.o: $(moxi_debug_OBJECTS)
 SUBDIRS = doc libmemcached-0.30/libmemcached $(MAYBE_LIBCONFLATE)
 DIST_SUBDIRS = doc libmemcached-0.30/libmemcached $(MAYBE_LIBCONFLATE)
 DIST_DIRS = scripts
-EXTRA_DIST = doc scripts TODO t memcached.spec memcached_dtrace.d version.m4 libmemcached-0.30 protocol_binary.h patches debian
+EXTRA_DIST = doc scripts TODO t memcached.spec memcached_dtrace.d version.m4 libmemcached-0.30 \
+ protocol_binary.h patches debian moxiswig.i
 
 MOSTLYCLEANFILES = *.gcov *.gcno *.gcda *.tcov
+
+moxiswig_wrap.c: moxiswig.i cproxy.h memcached.h
+	swig -lua moxiswig.i
 
 memcached-debug: moxi-debug
 	cp moxi-debug memcached-debug

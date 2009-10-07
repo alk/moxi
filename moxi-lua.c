@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef HAVE_LUA_H
@@ -138,7 +140,11 @@ int register_conflate_callback(lua_State *lua)
     return 0;
 }
 
+extern
+int luaopen_moxiswig(lua_State *);
+
 static const luaL_Reg moxilib[] = {
+	{"__init", luaopen_moxiswig},
     {"register_conflate_callback", register_conflate_callback},
     {NULL, NULL}
 };
