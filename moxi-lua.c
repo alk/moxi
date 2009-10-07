@@ -163,7 +163,6 @@ void moxilua_init_proxy_main(proxy_main *m)
         if (settings.verbose > 0) {
             fprintf(stderr, "per-proxy lua configuration failed: %s", lua_tostring(lua, -1));
         }
-        puts("fuck!");
         goto out;
     }
 out:
