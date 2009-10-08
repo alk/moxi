@@ -149,6 +149,30 @@ static const luaL_Reg moxilib[] = {
     {NULL, NULL}
 };
 
+
+void lua_inspect_value(lua_State *lua, int index);
+void lua_inspect_global(lua_State *lua, const char *name);
+
+void lua_inspect_value(lua_State *lua, int index)
+{
+    lua_pushcfunction(lua, traceback);
+    lua_getglobal(lua, "inspect");
+    lua_pushvalue(lua, index);
+    int rv = lua_pcall(lua, 1, 0, -3);
+    if (rv) {
+        fprintf(stderr, "inspect failed: %s\n", lua_tostring(lua, -1));
+        lua_pop(lua, 1);
+    }
+    lua_pop(lua, 1);
+}
+
+void lua_inspect_global(lua_State *lua, const char *name)
+{
+    lua_getglobal(lua, name);
+    lua_inspect_value(lua, lua_gettop(lua));
+    lua_pop(lua, 1);
+}
+
 void moxilua_init_proxy_main(proxy_main *m)
 {
     lua_State *lua = luaL_newstate();

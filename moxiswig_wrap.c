@@ -1501,7 +1501,7 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_enum_stats_cmd_type swig_types[13]
 #define SWIGTYPE_p_event swig_types[14]
 #define SWIGTYPE_p_event_base swig_types[15]
-#define SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void swig_types[16]
+#define SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void swig_types[16]
 #define SWIGTYPE_p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void swig_types[17]
 #define SWIGTYPE_p_f_p_q_const__void_p_void__void swig_types[18]
 #define SWIGTYPE_p_f_p_struct_conn__int swig_types[19]
@@ -1545,15 +1545,14 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_timeval swig_types[57]
 #define SWIGTYPE_p_token_s swig_types[58]
 #define SWIGTYPE_p_uint16_t swig_types[59]
-#define SWIGTYPE_p_uint32_t swig_types[60]
-#define SWIGTYPE_p_uint64_t swig_types[61]
-#define SWIGTYPE_p_uint8_t swig_types[62]
-#define SWIGTYPE_p_unsigned_char swig_types[63]
-#define SWIGTYPE_p_unsigned_int swig_types[64]
-#define SWIGTYPE_p_void swig_types[65]
-#define SWIGTYPE_p_work_queue swig_types[66]
-static swig_type_info *swig_types[68];
-static swig_module_info swig_module = {swig_types, 67, 0, 0, 0, 0};
+#define SWIGTYPE_p_uint8_t swig_types[60]
+#define SWIGTYPE_p_unsigned_char swig_types[61]
+#define SWIGTYPE_p_unsigned_int swig_types[62]
+#define SWIGTYPE_p_unsigned_long_long swig_types[63]
+#define SWIGTYPE_p_void swig_types[64]
+#define SWIGTYPE_p_work_queue swig_types[65]
+static swig_type_info *swig_types[67];
+static swig_module_info swig_module = {swig_types, 66, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1619,16 +1618,11 @@ fail:
 static int _wrap_msec_current_time_set(lua_State* L) {
   int SWIG_arg = 0;
   uint32_t arg1 ;
-  uint32_t *argp1 ;
   
   SWIG_check_num_args("msec_current_time",1,1)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("msec_current_time",1,"uint32_t volatile");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("msec_current_time_set",1,SWIGTYPE_p_uint32_t);
-  }
-  arg1 = *argp1;
-  
+  if(!lua_isnumber(L,1)) SWIG_fail_arg("msec_current_time",1,"uint32_t volatile");
+  SWIG_contract_assert((lua_tonumber(L,1)>=0),"number must not be negative")
+  arg1 = (uint32_t volatile)lua_tonumber(L, 1);
   msec_current_time = (uint32_t volatile )arg1;
   
   return SWIG_arg;
@@ -1646,13 +1640,8 @@ static int _wrap_msec_current_time_get(lua_State* L) {
   uint32_t result;
   
   SWIG_check_num_args("msec_current_time",0,0)
-  result = (uint32_t)msec_current_time;
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t volatile));
-    memmove(resultptr, &result, sizeof(uint32_t volatile));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t)(uint32_t)msec_current_time;
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2016,22 +2005,17 @@ static int _wrap_mcache_max_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("max",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("max",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("max",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("max",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_max_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_max_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->max = arg2;
   
   return SWIG_arg;
@@ -2056,13 +2040,8 @@ static int _wrap_mcache_max_get(lua_State* L) {
     SWIG_fail_ptr("mcache_max_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->max);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->max);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2177,22 +2156,17 @@ static int _wrap_mcache_oldest_live_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("oldest_live",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("oldest_live",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("oldest_live",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("oldest_live",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_oldest_live_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_oldest_live_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->oldest_live = arg2;
   
   return SWIG_arg;
@@ -2217,13 +2191,8 @@ static int _wrap_mcache_oldest_live_get(lua_State* L) {
     SWIG_fail_ptr("mcache_oldest_live_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->oldest_live);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->oldest_live);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2238,22 +2207,16 @@ static int _wrap_mcache_tot_get_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_get_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_get_hits",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_get_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_get_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_get_hits_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_get_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_get_hits = arg2;
   
   return SWIG_arg;
@@ -2278,13 +2241,8 @@ static int _wrap_mcache_tot_get_hits_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_get_hits_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_get_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_get_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2299,22 +2257,16 @@ static int _wrap_mcache_tot_get_expires_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_get_expires",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_get_expires",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_get_expires",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_get_expires",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_get_expires_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_get_expires_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_get_expires = arg2;
   
   return SWIG_arg;
@@ -2339,13 +2291,8 @@ static int _wrap_mcache_tot_get_expires_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_get_expires_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_get_expires);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_get_expires);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2360,22 +2307,16 @@ static int _wrap_mcache_tot_get_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_get_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_get_misses",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_get_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_get_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_get_misses_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_get_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_get_misses = arg2;
   
   return SWIG_arg;
@@ -2400,13 +2341,8 @@ static int _wrap_mcache_tot_get_misses_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_get_misses_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_get_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_get_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2421,22 +2357,16 @@ static int _wrap_mcache_tot_get_bytes_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_get_bytes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_get_bytes",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_get_bytes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_get_bytes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_get_bytes_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_get_bytes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_get_bytes = arg2;
   
   return SWIG_arg;
@@ -2461,13 +2391,8 @@ static int _wrap_mcache_tot_get_bytes_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_get_bytes_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_get_bytes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_get_bytes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2482,22 +2407,16 @@ static int _wrap_mcache_tot_adds_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_adds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_adds",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_adds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_adds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_adds_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_adds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_adds = arg2;
   
   return SWIG_arg;
@@ -2522,13 +2441,8 @@ static int _wrap_mcache_tot_adds_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_adds_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_adds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_adds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2543,22 +2457,16 @@ static int _wrap_mcache_tot_add_skips_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_add_skips",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_add_skips",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_add_skips",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_add_skips",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_add_skips_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_add_skips_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_add_skips = arg2;
   
   return SWIG_arg;
@@ -2583,13 +2491,8 @@ static int _wrap_mcache_tot_add_skips_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_add_skips_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_add_skips);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_add_skips);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2604,22 +2507,16 @@ static int _wrap_mcache_tot_add_fails_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_add_fails",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_add_fails",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_add_fails",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_add_fails",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_add_fails_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_add_fails_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_add_fails = arg2;
   
   return SWIG_arg;
@@ -2644,13 +2541,8 @@ static int _wrap_mcache_tot_add_fails_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_add_fails_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_add_fails);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_add_fails);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2665,22 +2557,16 @@ static int _wrap_mcache_tot_add_bytes_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_add_bytes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_add_bytes",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_add_bytes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_add_bytes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_add_bytes_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_add_bytes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_add_bytes = arg2;
   
   return SWIG_arg;
@@ -2705,13 +2591,8 @@ static int _wrap_mcache_tot_add_bytes_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_add_bytes_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_add_bytes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_add_bytes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2726,22 +2607,16 @@ static int _wrap_mcache_tot_deletes_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_deletes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_deletes",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_deletes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_deletes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_deletes_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_deletes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_deletes = arg2;
   
   return SWIG_arg;
@@ -2766,13 +2641,8 @@ static int _wrap_mcache_tot_deletes_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_deletes_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_deletes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_deletes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2787,22 +2657,16 @@ static int _wrap_mcache_tot_evictions_set(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_evictions",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_evictions",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_evictions",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_evictions",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_tot_evictions_set",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mcache_tot_evictions_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_evictions = arg2;
   
   return SWIG_arg;
@@ -2827,13 +2691,8 @@ static int _wrap_mcache_tot_evictions_get(lua_State* L) {
     SWIG_fail_ptr("mcache_tot_evictions_get",1,SWIGTYPE_p_mcache);
   }
   
-  result =  ((arg1)->tot_evictions);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_evictions);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2897,22 +2756,17 @@ static int _wrap_proxy_behavior_cycle_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("cycle",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cycle",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cycle",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cycle",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_cycle_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_cycle_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cycle = arg2;
   
   return SWIG_arg;
@@ -2937,13 +2791,8 @@ static int _wrap_proxy_behavior_cycle_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_cycle_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->cycle);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->cycle);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2958,22 +2807,17 @@ static int _wrap_proxy_behavior_downstream_max_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("downstream_max",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("downstream_max",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("downstream_max",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("downstream_max",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_downstream_max_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_downstream_max_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->downstream_max = arg2;
   
   return SWIG_arg;
@@ -2998,13 +2842,8 @@ static int _wrap_proxy_behavior_downstream_max_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_downstream_max_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->downstream_max);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->downstream_max);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3019,22 +2858,17 @@ static int _wrap_proxy_behavior_downstream_weight_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("downstream_weight",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("downstream_weight",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("downstream_weight",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("downstream_weight",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_downstream_weight_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_downstream_weight_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->downstream_weight = arg2;
   
   return SWIG_arg;
@@ -3059,13 +2893,8 @@ static int _wrap_proxy_behavior_downstream_weight_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_downstream_weight_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->downstream_weight);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->downstream_weight);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3080,22 +2909,17 @@ static int _wrap_proxy_behavior_downstream_retry_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("downstream_retry",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("downstream_retry",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("downstream_retry",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("downstream_retry",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_downstream_retry_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_downstream_retry_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->downstream_retry = arg2;
   
   return SWIG_arg;
@@ -3120,13 +2944,8 @@ static int _wrap_proxy_behavior_downstream_retry_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_downstream_retry_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->downstream_retry);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->downstream_retry);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3313,22 +3132,17 @@ static int _wrap_proxy_behavior_front_cache_max_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("front_cache_max",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("front_cache_max",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("front_cache_max",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("front_cache_max",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_front_cache_max_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_front_cache_max_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->front_cache_max = arg2;
   
   return SWIG_arg;
@@ -3353,13 +3167,8 @@ static int _wrap_proxy_behavior_front_cache_max_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_front_cache_max_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->front_cache_max);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->front_cache_max);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3374,22 +3183,17 @@ static int _wrap_proxy_behavior_front_cache_lifespan_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("front_cache_lifespan",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("front_cache_lifespan",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("front_cache_lifespan",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("front_cache_lifespan",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_front_cache_lifespan_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_front_cache_lifespan_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->front_cache_lifespan = arg2;
   
   return SWIG_arg;
@@ -3414,13 +3218,8 @@ static int _wrap_proxy_behavior_front_cache_lifespan_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_front_cache_lifespan_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->front_cache_lifespan);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->front_cache_lifespan);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3549,22 +3348,17 @@ static int _wrap_proxy_behavior_key_stats_max_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("key_stats_max",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("key_stats_max",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("key_stats_max",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("key_stats_max",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_key_stats_max_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_key_stats_max_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->key_stats_max = arg2;
   
   return SWIG_arg;
@@ -3589,13 +3383,8 @@ static int _wrap_proxy_behavior_key_stats_max_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_key_stats_max_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->key_stats_max);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->key_stats_max);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3610,22 +3399,17 @@ static int _wrap_proxy_behavior_key_stats_lifespan_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_behavior *arg1 = (struct proxy_behavior *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("key_stats_lifespan",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("key_stats_lifespan",1,"struct proxy_behavior *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("key_stats_lifespan",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("key_stats_lifespan",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_behavior,0))){
     SWIG_fail_ptr("proxy_behavior_key_stats_lifespan_set",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_behavior_key_stats_lifespan_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->key_stats_lifespan = arg2;
   
   return SWIG_arg;
@@ -3650,13 +3434,8 @@ static int _wrap_proxy_behavior_key_stats_lifespan_get(lua_State* L) {
     SWIG_fail_ptr("proxy_behavior_key_stats_lifespan_get",1,SWIGTYPE_p_proxy_behavior);
   }
   
-  result =  ((arg1)->key_stats_lifespan);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->key_stats_lifespan);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4573,22 +4352,16 @@ static int _wrap_proxy_main_stat_configs_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_configs",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_configs",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_configs",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_configs",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_configs_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_configs_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_configs = arg2;
   
   return SWIG_arg;
@@ -4613,13 +4386,8 @@ static int _wrap_proxy_main_stat_configs_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_configs_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_configs);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_configs);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4634,22 +4402,16 @@ static int _wrap_proxy_main_stat_config_fails_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_config_fails",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_config_fails",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_config_fails",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_config_fails",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_config_fails_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_config_fails_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_config_fails = arg2;
   
   return SWIG_arg;
@@ -4674,13 +4436,8 @@ static int _wrap_proxy_main_stat_config_fails_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_config_fails_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_config_fails);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_config_fails);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4695,22 +4452,16 @@ static int _wrap_proxy_main_stat_proxy_starts_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_proxy_starts",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_proxy_starts",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_proxy_starts",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_proxy_starts",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_proxy_starts_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_proxy_starts_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_proxy_starts = arg2;
   
   return SWIG_arg;
@@ -4735,13 +4486,8 @@ static int _wrap_proxy_main_stat_proxy_starts_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_proxy_starts_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_proxy_starts);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_proxy_starts);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4756,22 +4502,16 @@ static int _wrap_proxy_main_stat_proxy_start_fails_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_proxy_start_fails",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_proxy_start_fails",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_proxy_start_fails",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_proxy_start_fails",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_proxy_start_fails_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_proxy_start_fails_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_proxy_start_fails = arg2;
   
   return SWIG_arg;
@@ -4796,13 +4536,8 @@ static int _wrap_proxy_main_stat_proxy_start_fails_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_proxy_start_fails_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_proxy_start_fails);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_proxy_start_fails);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4817,22 +4552,16 @@ static int _wrap_proxy_main_stat_proxy_existings_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_proxy_existings",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_proxy_existings",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_proxy_existings",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_proxy_existings",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_proxy_existings_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_proxy_existings_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_proxy_existings = arg2;
   
   return SWIG_arg;
@@ -4857,13 +4586,8 @@ static int _wrap_proxy_main_stat_proxy_existings_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_proxy_existings_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_proxy_existings);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_proxy_existings);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -4878,22 +4602,16 @@ static int _wrap_proxy_main_stat_proxy_shutdowns_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_main *arg1 = (struct proxy_main *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("stat_proxy_shutdowns",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stat_proxy_shutdowns",1,"struct proxy_main *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("stat_proxy_shutdowns",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("stat_proxy_shutdowns",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_main,0))){
     SWIG_fail_ptr("proxy_main_stat_proxy_shutdowns_set",1,SWIGTYPE_p_proxy_main);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_main_stat_proxy_shutdowns_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->stat_proxy_shutdowns = arg2;
   
   return SWIG_arg;
@@ -4918,13 +4636,8 @@ static int _wrap_proxy_main_stat_proxy_shutdowns_get(lua_State* L) {
     SWIG_fail_ptr("proxy_main_stat_proxy_shutdowns_get",1,SWIGTYPE_p_proxy_main);
   }
   
-  result =  ((arg1)->stat_proxy_shutdowns);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->stat_proxy_shutdowns);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -5145,22 +4858,17 @@ static int _wrap_proxy_config_ver_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy *arg1 = (struct proxy *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("config_ver",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("config_ver",1,"struct proxy *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy,0))){
     SWIG_fail_ptr("proxy_config_ver_set",1,SWIGTYPE_p_proxy);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_config_ver_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->config_ver = arg2;
   
   return SWIG_arg;
@@ -5185,13 +4893,8 @@ static int _wrap_proxy_config_ver_get(lua_State* L) {
     SWIG_fail_ptr("proxy_config_ver_get",1,SWIGTYPE_p_proxy);
   }
   
-  result =  ((arg1)->config_ver);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->config_ver);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -5321,22 +5024,16 @@ static int _wrap_proxy_listening_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy *arg1 = (struct proxy *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("listening",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("listening",1,"struct proxy *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("listening",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("listening",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy,0))){
     SWIG_fail_ptr("proxy_listening_set",1,SWIGTYPE_p_proxy);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_listening_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->listening = arg2;
   
   return SWIG_arg;
@@ -5361,13 +5058,8 @@ static int _wrap_proxy_listening_get(lua_State* L) {
     SWIG_fail_ptr("proxy_listening_get",1,SWIGTYPE_p_proxy);
   }
   
-  result =  ((arg1)->listening);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->listening);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -5382,22 +5074,16 @@ static int _wrap_proxy_listening_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy *arg1 = (struct proxy *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("listening_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("listening_failed",1,"struct proxy *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("listening_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("listening_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy,0))){
     SWIG_fail_ptr("proxy_listening_failed_set",1,SWIGTYPE_p_proxy);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_listening_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->listening_failed = arg2;
   
   return SWIG_arg;
@@ -5422,13 +5108,8 @@ static int _wrap_proxy_listening_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_listening_failed_get",1,SWIGTYPE_p_proxy);
   }
   
-  result =  ((arg1)->listening_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->listening_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -5884,22 +5565,16 @@ static int _wrap_proxy_stats_num_upstream_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("num_upstream",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("num_upstream",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("num_upstream",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("num_upstream",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_num_upstream_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_num_upstream_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->num_upstream = arg2;
   
   return SWIG_arg;
@@ -5924,13 +5599,8 @@ static int _wrap_proxy_stats_num_upstream_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_num_upstream_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->num_upstream);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->num_upstream);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -5945,22 +5615,16 @@ static int _wrap_proxy_stats_tot_upstream_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_upstream",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_upstream",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_upstream",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_upstream",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_upstream_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_upstream_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_upstream = arg2;
   
   return SWIG_arg;
@@ -5985,13 +5649,8 @@ static int _wrap_proxy_stats_tot_upstream_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_upstream_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_upstream);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_upstream);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6006,22 +5665,16 @@ static int _wrap_proxy_stats_num_downstream_conn_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("num_downstream_conn",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("num_downstream_conn",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("num_downstream_conn",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("num_downstream_conn",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_num_downstream_conn_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_num_downstream_conn_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->num_downstream_conn = arg2;
   
   return SWIG_arg;
@@ -6046,13 +5699,8 @@ static int _wrap_proxy_stats_num_downstream_conn_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_num_downstream_conn_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->num_downstream_conn);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->num_downstream_conn);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6067,22 +5715,16 @@ static int _wrap_proxy_stats_tot_downstream_conn_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_conn",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_conn",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_conn",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_conn",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_conn_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_conn_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_conn = arg2;
   
   return SWIG_arg;
@@ -6107,13 +5749,8 @@ static int _wrap_proxy_stats_tot_downstream_conn_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_conn_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_conn);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_conn);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6128,22 +5765,16 @@ static int _wrap_proxy_stats_tot_downstream_released_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_released",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_released",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_released",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_released",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_released_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_released_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_released = arg2;
   
   return SWIG_arg;
@@ -6168,13 +5799,8 @@ static int _wrap_proxy_stats_tot_downstream_released_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_released_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_released);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_released);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6189,22 +5815,16 @@ static int _wrap_proxy_stats_tot_downstream_reserved_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_reserved",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_reserved",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_reserved",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_reserved",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_reserved_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_reserved_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_reserved = arg2;
   
   return SWIG_arg;
@@ -6229,13 +5849,8 @@ static int _wrap_proxy_stats_tot_downstream_reserved_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_reserved_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_reserved);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_reserved);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6250,22 +5865,16 @@ static int _wrap_proxy_stats_tot_downstream_freed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_freed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_freed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_freed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_freed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_freed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_freed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_freed = arg2;
   
   return SWIG_arg;
@@ -6290,13 +5899,8 @@ static int _wrap_proxy_stats_tot_downstream_freed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_freed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_freed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_freed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6311,22 +5915,16 @@ static int _wrap_proxy_stats_tot_downstream_quit_server_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_quit_server",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_quit_server",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_quit_server",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_quit_server",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_quit_server_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_quit_server_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_quit_server = arg2;
   
   return SWIG_arg;
@@ -6351,13 +5949,8 @@ static int _wrap_proxy_stats_tot_downstream_quit_server_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_quit_server_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_quit_server);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_quit_server);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6372,22 +5965,16 @@ static int _wrap_proxy_stats_tot_downstream_max_reached_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_max_reached",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_max_reached",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_max_reached",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_max_reached",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_max_reached_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_max_reached_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_max_reached = arg2;
   
   return SWIG_arg;
@@ -6412,13 +5999,8 @@ static int _wrap_proxy_stats_tot_downstream_max_reached_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_max_reached_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_max_reached);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_max_reached);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6433,22 +6015,16 @@ static int _wrap_proxy_stats_tot_downstream_create_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_create_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_create_failed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_create_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_create_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_create_failed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_create_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_create_failed = arg2;
   
   return SWIG_arg;
@@ -6473,13 +6049,8 @@ static int _wrap_proxy_stats_tot_downstream_create_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_create_failed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_create_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_create_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6494,22 +6065,16 @@ static int _wrap_proxy_stats_tot_downstream_connect_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_connect",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_connect",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_connect",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_connect",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_connect_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_connect_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_connect = arg2;
   
   return SWIG_arg;
@@ -6534,13 +6099,8 @@ static int _wrap_proxy_stats_tot_downstream_connect_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_connect_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_connect);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_connect);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6555,22 +6115,16 @@ static int _wrap_proxy_stats_tot_downstream_connect_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_connect_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_connect_failed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_connect_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_connect_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_connect_failed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_connect_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_connect_failed = arg2;
   
   return SWIG_arg;
@@ -6595,13 +6149,8 @@ static int _wrap_proxy_stats_tot_downstream_connect_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_connect_failed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_connect_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_connect_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6616,22 +6165,16 @@ static int _wrap_proxy_stats_tot_downstream_auth_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_auth",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_auth",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_auth",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_auth",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_auth_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_auth_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_auth = arg2;
   
   return SWIG_arg;
@@ -6656,13 +6199,8 @@ static int _wrap_proxy_stats_tot_downstream_auth_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_auth_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_auth);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_auth);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6677,22 +6215,16 @@ static int _wrap_proxy_stats_tot_downstream_auth_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_auth_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_auth_failed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_auth_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_auth_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_auth_failed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_auth_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_auth_failed = arg2;
   
   return SWIG_arg;
@@ -6717,13 +6249,8 @@ static int _wrap_proxy_stats_tot_downstream_auth_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_auth_failed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_auth_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_auth_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6738,22 +6265,16 @@ static int _wrap_proxy_stats_tot_downstream_bucket_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_bucket",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_bucket",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_bucket",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_bucket",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_bucket = arg2;
   
   return SWIG_arg;
@@ -6778,13 +6299,8 @@ static int _wrap_proxy_stats_tot_downstream_bucket_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_bucket);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_bucket);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6799,22 +6315,16 @@ static int _wrap_proxy_stats_tot_downstream_bucket_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_bucket_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_bucket_failed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_bucket_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_bucket_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_failed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_bucket_failed = arg2;
   
   return SWIG_arg;
@@ -6839,13 +6349,8 @@ static int _wrap_proxy_stats_tot_downstream_bucket_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_bucket_failed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_bucket_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_bucket_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6860,22 +6365,16 @@ static int _wrap_proxy_stats_tot_downstream_propagate_failed_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_propagate_failed",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_propagate_failed",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_propagate_failed",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_propagate_failed",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_propagate_failed_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_propagate_failed_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_propagate_failed = arg2;
   
   return SWIG_arg;
@@ -6900,13 +6399,8 @@ static int _wrap_proxy_stats_tot_downstream_propagate_failed_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_propagate_failed_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_propagate_failed);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_propagate_failed);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6921,22 +6415,16 @@ static int _wrap_proxy_stats_tot_downstream_close_on_upstream_close_set(lua_Stat
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_close_on_upstream_close",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_close_on_upstream_close",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_close_on_upstream_close",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_close_on_upstream_close",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_close_on_upstream_close_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_close_on_upstream_close_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_close_on_upstream_close = arg2;
   
   return SWIG_arg;
@@ -6961,13 +6449,8 @@ static int _wrap_proxy_stats_tot_downstream_close_on_upstream_close_get(lua_Stat
     SWIG_fail_ptr("proxy_stats_tot_downstream_close_on_upstream_close_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_close_on_upstream_close);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_close_on_upstream_close);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -6982,22 +6465,16 @@ static int _wrap_proxy_stats_tot_downstream_timeout_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_downstream_timeout",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_downstream_timeout",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_downstream_timeout",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_downstream_timeout",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_downstream_timeout_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_downstream_timeout_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_downstream_timeout = arg2;
   
   return SWIG_arg;
@@ -7022,13 +6499,8 @@ static int _wrap_proxy_stats_tot_downstream_timeout_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_downstream_timeout_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_downstream_timeout);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_downstream_timeout);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7043,22 +6515,16 @@ static int _wrap_proxy_stats_tot_wait_queue_timeout_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_wait_queue_timeout",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_wait_queue_timeout",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_wait_queue_timeout",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_wait_queue_timeout",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_wait_queue_timeout_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_wait_queue_timeout_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_wait_queue_timeout = arg2;
   
   return SWIG_arg;
@@ -7083,13 +6549,8 @@ static int _wrap_proxy_stats_tot_wait_queue_timeout_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_wait_queue_timeout_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_wait_queue_timeout);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_wait_queue_timeout);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7104,22 +6565,16 @@ static int _wrap_proxy_stats_tot_assign_downstream_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_assign_downstream",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_assign_downstream",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_assign_downstream",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_assign_downstream",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_assign_downstream_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_assign_downstream_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_assign_downstream = arg2;
   
   return SWIG_arg;
@@ -7144,13 +6599,8 @@ static int _wrap_proxy_stats_tot_assign_downstream_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_assign_downstream_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_assign_downstream);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_assign_downstream);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7165,22 +6615,16 @@ static int _wrap_proxy_stats_tot_assign_upstream_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_assign_upstream",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_assign_upstream",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_assign_upstream",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_assign_upstream",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_assign_upstream_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_assign_upstream_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_assign_upstream = arg2;
   
   return SWIG_arg;
@@ -7205,13 +6649,8 @@ static int _wrap_proxy_stats_tot_assign_upstream_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_assign_upstream_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_assign_upstream);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_assign_upstream);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7226,22 +6665,16 @@ static int _wrap_proxy_stats_tot_assign_recursion_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_assign_recursion",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_assign_recursion",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_assign_recursion",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_assign_recursion",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_assign_recursion_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_assign_recursion_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_assign_recursion = arg2;
   
   return SWIG_arg;
@@ -7266,13 +6699,8 @@ static int _wrap_proxy_stats_tot_assign_recursion_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_assign_recursion_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_assign_recursion);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_assign_recursion);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7287,22 +6715,16 @@ static int _wrap_proxy_stats_tot_reset_upstream_avail_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_reset_upstream_avail",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_reset_upstream_avail",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_reset_upstream_avail",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_reset_upstream_avail",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_reset_upstream_avail_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_reset_upstream_avail_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_reset_upstream_avail = arg2;
   
   return SWIG_arg;
@@ -7327,13 +6749,8 @@ static int _wrap_proxy_stats_tot_reset_upstream_avail_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_reset_upstream_avail_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_reset_upstream_avail);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_reset_upstream_avail);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7348,22 +6765,16 @@ static int _wrap_proxy_stats_tot_retry_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_retry",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_retry",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_retry",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_retry",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_retry_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_retry_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_retry = arg2;
   
   return SWIG_arg;
@@ -7388,13 +6799,8 @@ static int _wrap_proxy_stats_tot_retry_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_retry_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_retry);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_retry);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7409,22 +6815,16 @@ static int _wrap_proxy_stats_tot_multiget_keys_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_multiget_keys",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_multiget_keys",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_multiget_keys",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_multiget_keys",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_multiget_keys_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_multiget_keys_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_multiget_keys = arg2;
   
   return SWIG_arg;
@@ -7449,13 +6849,8 @@ static int _wrap_proxy_stats_tot_multiget_keys_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_multiget_keys_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_multiget_keys);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_multiget_keys);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7470,22 +6865,16 @@ static int _wrap_proxy_stats_tot_multiget_keys_dedupe_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_multiget_keys_dedupe",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_multiget_keys_dedupe",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_multiget_keys_dedupe",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_multiget_keys_dedupe",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_multiget_keys_dedupe_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_multiget_keys_dedupe_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_multiget_keys_dedupe = arg2;
   
   return SWIG_arg;
@@ -7510,13 +6899,8 @@ static int _wrap_proxy_stats_tot_multiget_keys_dedupe_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_multiget_keys_dedupe_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_multiget_keys_dedupe);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_multiget_keys_dedupe);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7531,22 +6915,16 @@ static int _wrap_proxy_stats_tot_multiget_bytes_dedupe_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_multiget_bytes_dedupe",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_multiget_bytes_dedupe",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_multiget_bytes_dedupe",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_multiget_bytes_dedupe",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_multiget_bytes_dedupe_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_multiget_bytes_dedupe_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_multiget_bytes_dedupe = arg2;
   
   return SWIG_arg;
@@ -7571,13 +6949,8 @@ static int _wrap_proxy_stats_tot_multiget_bytes_dedupe_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_multiget_bytes_dedupe_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_multiget_bytes_dedupe);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_multiget_bytes_dedupe);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7592,22 +6965,16 @@ static int _wrap_proxy_stats_tot_optimize_sets_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_optimize_sets",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_optimize_sets",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_optimize_sets",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_optimize_sets",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_optimize_sets_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_optimize_sets_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_optimize_sets = arg2;
   
   return SWIG_arg;
@@ -7632,13 +6999,8 @@ static int _wrap_proxy_stats_tot_optimize_sets_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_optimize_sets_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_optimize_sets);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_optimize_sets);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7653,22 +7015,16 @@ static int _wrap_proxy_stats_tot_optimize_self_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("tot_optimize_self",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("tot_optimize_self",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("tot_optimize_self",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("tot_optimize_self",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_tot_optimize_self_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_tot_optimize_self_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->tot_optimize_self = arg2;
   
   return SWIG_arg;
@@ -7693,13 +7049,8 @@ static int _wrap_proxy_stats_tot_optimize_self_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_tot_optimize_self_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->tot_optimize_self);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->tot_optimize_self);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7714,22 +7065,16 @@ static int _wrap_proxy_stats_err_oom_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("err_oom",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("err_oom",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("err_oom",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("err_oom",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_err_oom_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_err_oom_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->err_oom = arg2;
   
   return SWIG_arg;
@@ -7754,13 +7099,8 @@ static int _wrap_proxy_stats_err_oom_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_err_oom_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->err_oom);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->err_oom);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7775,22 +7115,16 @@ static int _wrap_proxy_stats_err_upstream_write_prep_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("err_upstream_write_prep",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("err_upstream_write_prep",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("err_upstream_write_prep",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("err_upstream_write_prep",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_err_upstream_write_prep_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_err_upstream_write_prep_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->err_upstream_write_prep = arg2;
   
   return SWIG_arg;
@@ -7815,13 +7149,8 @@ static int _wrap_proxy_stats_err_upstream_write_prep_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_err_upstream_write_prep_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->err_upstream_write_prep);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->err_upstream_write_prep);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7836,22 +7165,16 @@ static int _wrap_proxy_stats_err_downstream_write_prep_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_stats *arg1 = (struct proxy_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("err_downstream_write_prep",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("err_downstream_write_prep",1,"struct proxy_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("err_downstream_write_prep",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("err_downstream_write_prep",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats,0))){
     SWIG_fail_ptr("proxy_stats_err_downstream_write_prep_set",1,SWIGTYPE_p_proxy_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_err_downstream_write_prep_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->err_downstream_write_prep = arg2;
   
   return SWIG_arg;
@@ -7876,13 +7199,8 @@ static int _wrap_proxy_stats_err_downstream_write_prep_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_err_downstream_write_prep_get",1,SWIGTYPE_p_proxy_stats);
   }
   
-  result =  ((arg1)->err_downstream_write_prep);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->err_downstream_write_prep);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -7961,22 +7279,16 @@ static int _wrap_proxy_stats_cmd_seen_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("seen",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("seen",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("seen",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("seen",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_seen_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_seen_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->seen = arg2;
   
   return SWIG_arg;
@@ -8001,13 +7313,8 @@ static int _wrap_proxy_stats_cmd_seen_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_seen_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->seen);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->seen);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8022,22 +7329,16 @@ static int _wrap_proxy_stats_cmd_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("hits",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_hits_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->hits = arg2;
   
   return SWIG_arg;
@@ -8062,13 +7363,8 @@ static int _wrap_proxy_stats_cmd_hits_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_hits_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8083,22 +7379,16 @@ static int _wrap_proxy_stats_cmd_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("misses",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_misses_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->misses = arg2;
   
   return SWIG_arg;
@@ -8123,13 +7413,8 @@ static int _wrap_proxy_stats_cmd_misses_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_misses_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8144,22 +7429,16 @@ static int _wrap_proxy_stats_cmd_read_bytes_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("read_bytes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("read_bytes",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("read_bytes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("read_bytes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_read_bytes_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_read_bytes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->read_bytes = arg2;
   
   return SWIG_arg;
@@ -8184,13 +7463,8 @@ static int _wrap_proxy_stats_cmd_read_bytes_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_read_bytes_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->read_bytes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->read_bytes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8205,22 +7479,16 @@ static int _wrap_proxy_stats_cmd_write_bytes_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("write_bytes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("write_bytes",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("write_bytes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("write_bytes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_write_bytes_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_write_bytes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->write_bytes = arg2;
   
   return SWIG_arg;
@@ -8245,13 +7513,8 @@ static int _wrap_proxy_stats_cmd_write_bytes_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_write_bytes_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->write_bytes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->write_bytes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8266,22 +7529,16 @@ static int _wrap_proxy_stats_cmd_cas_set(lua_State* L) {
   int SWIG_arg = 0;
   proxy_stats_cmd *arg1 = (proxy_stats_cmd *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("cas",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cas",1,"proxy_stats_cmd *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cas",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cas",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_stats_cmd,0))){
     SWIG_fail_ptr("proxy_stats_cmd_cas_set",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_stats_cmd_cas_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cas = arg2;
   
   return SWIG_arg;
@@ -8306,13 +7563,8 @@ static int _wrap_proxy_stats_cmd_cas_get(lua_State* L) {
     SWIG_fail_ptr("proxy_stats_cmd_cas_get",1,SWIGTYPE_p_proxy_stats_cmd);
   }
   
-  result =  ((arg1)->cas);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->cas);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8622,22 +7874,17 @@ static int _wrap_key_stats_exptime_set(lua_State* L) {
   int SWIG_arg = 0;
   struct key_stats *arg1 = (struct key_stats *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("exptime",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("exptime",1,"struct key_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("exptime",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("exptime",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_key_stats,0))){
     SWIG_fail_ptr("key_stats_exptime_set",1,SWIGTYPE_p_key_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("key_stats_exptime_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->exptime = arg2;
   
   return SWIG_arg;
@@ -8662,13 +7909,8 @@ static int _wrap_key_stats_exptime_get(lua_State* L) {
     SWIG_fail_ptr("key_stats_exptime_get",1,SWIGTYPE_p_key_stats);
   }
   
-  result =  ((arg1)->exptime);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->exptime);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -8683,22 +7925,17 @@ static int _wrap_key_stats_added_at_set(lua_State* L) {
   int SWIG_arg = 0;
   struct key_stats *arg1 = (struct key_stats *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("added_at",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("added_at",1,"struct key_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("added_at",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("added_at",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_key_stats,0))){
     SWIG_fail_ptr("key_stats_added_at_set",1,SWIGTYPE_p_key_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("key_stats_added_at_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->added_at = arg2;
   
   return SWIG_arg;
@@ -8723,13 +7960,8 @@ static int _wrap_key_stats_added_at_get(lua_State* L) {
     SWIG_fail_ptr("key_stats_added_at_get",1,SWIGTYPE_p_key_stats);
   }
   
-  result =  ((arg1)->added_at);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->added_at);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -9066,22 +8298,17 @@ static int _wrap_proxy_td_config_ver_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_td *arg1 = (struct proxy_td *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("config_ver",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("config_ver",1,"struct proxy_td *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_td,0))){
     SWIG_fail_ptr("proxy_td_config_ver_set",1,SWIGTYPE_p_proxy_td);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("proxy_td_config_ver_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->config_ver = arg2;
   
   return SWIG_arg;
@@ -9106,13 +8333,8 @@ static int _wrap_proxy_td_config_ver_get(lua_State* L) {
     SWIG_fail_ptr("proxy_td_config_ver_get",1,SWIGTYPE_p_proxy_td);
   }
   
-  result =  ((arg1)->config_ver);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->config_ver);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -9397,22 +8619,16 @@ static int _wrap_proxy_td_downstream_tot_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_td *arg1 = (struct proxy_td *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("downstream_tot",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("downstream_tot",1,"struct proxy_td *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("downstream_tot",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("downstream_tot",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_td,0))){
     SWIG_fail_ptr("proxy_td_downstream_tot_set",1,SWIGTYPE_p_proxy_td);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_td_downstream_tot_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->downstream_tot = arg2;
   
   return SWIG_arg;
@@ -9437,13 +8653,8 @@ static int _wrap_proxy_td_downstream_tot_get(lua_State* L) {
     SWIG_fail_ptr("proxy_td_downstream_tot_get",1,SWIGTYPE_p_proxy_td);
   }
   
-  result =  ((arg1)->downstream_tot);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->downstream_tot);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -9558,22 +8769,16 @@ static int _wrap_proxy_td_downstream_assigns_set(lua_State* L) {
   int SWIG_arg = 0;
   struct proxy_td *arg1 = (struct proxy_td *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("downstream_assigns",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("downstream_assigns",1,"struct proxy_td *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("downstream_assigns",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("downstream_assigns",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_td,0))){
     SWIG_fail_ptr("proxy_td_downstream_assigns_set",1,SWIGTYPE_p_proxy_td);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("proxy_td_downstream_assigns_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->downstream_assigns = arg2;
   
   return SWIG_arg;
@@ -9598,13 +8803,8 @@ static int _wrap_proxy_td_downstream_assigns_get(lua_State* L) {
     SWIG_fail_ptr("proxy_td_downstream_assigns_get",1,SWIGTYPE_p_proxy_td);
   }
   
-  result =  ((arg1)->downstream_assigns);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->downstream_assigns);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -10132,22 +9332,17 @@ static int _wrap_downstream_config_ver_set(lua_State* L) {
   int SWIG_arg = 0;
   struct downstream *arg1 = (struct downstream *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("config_ver",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("config_ver",1,"struct downstream *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("config_ver",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_downstream,0))){
     SWIG_fail_ptr("downstream_config_ver_set",1,SWIGTYPE_p_downstream);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("downstream_config_ver_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->config_ver = arg2;
   
   return SWIG_arg;
@@ -10172,13 +9367,8 @@ static int _wrap_downstream_config_ver_get(lua_State* L) {
     SWIG_fail_ptr("downstream_config_ver_get",1,SWIGTYPE_p_downstream);
   }
   
-  result =  ((arg1)->config_ver);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->config_ver);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -10959,25 +10149,20 @@ static int _wrap_cproxy_create(lua_State* L) {
   uint32_t arg4 ;
   proxy_behavior_pool *arg5 = (proxy_behavior_pool *) 0 ;
   int arg6 ;
-  uint32_t *argp4 ;
   proxy *result = 0 ;
   
   SWIG_check_num_args("cproxy_create",6,6)
   if(!lua_isstring(L,1)) SWIG_fail_arg("cproxy_create",1,"char *");
   if(!lua_isnumber(L,2)) SWIG_fail_arg("cproxy_create",2,"int");
   if(!lua_isstring(L,3)) SWIG_fail_arg("cproxy_create",3,"char *");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("cproxy_create",4,"uint32_t");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("cproxy_create",4,"uint32_t");
   if(!SWIG_isptrtype(L,5)) SWIG_fail_arg("cproxy_create",5,"proxy_behavior_pool *");
   if(!lua_isnumber(L,6)) SWIG_fail_arg("cproxy_create",6,"int");
   arg1 = (char *)lua_tostring(L, 1);
   arg2 = (int)lua_tonumber(L, 2);
   arg3 = (char *)lua_tostring(L, 3);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&argp4,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("cproxy_create",4,SWIGTYPE_p_uint32_t);
-  }
-  arg4 = *argp4;
-  
+  SWIG_contract_assert((lua_tonumber(L,4)>=0),"number must not be negative")
+  arg4 = (uint32_t)lua_tonumber(L, 4);
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,5,(void**)&arg5,SWIGTYPE_p_proxy_behavior_pool,0))){
     SWIG_fail_ptr("cproxy_create",5,SWIGTYPE_p_proxy_behavior_pool);
@@ -11255,20 +10440,15 @@ static int _wrap_cproxy_create_downstream(lua_State* L) {
   char *arg1 = (char *) 0 ;
   uint32_t arg2 ;
   proxy_behavior_pool *arg3 = (proxy_behavior_pool *) 0 ;
-  uint32_t *argp2 ;
   downstream *result = 0 ;
   
   SWIG_check_num_args("cproxy_create_downstream",3,3)
   if(!lua_isstring(L,1)) SWIG_fail_arg("cproxy_create_downstream",1,"char *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cproxy_create_downstream",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cproxy_create_downstream",2,"uint32_t");
   if(!SWIG_isptrtype(L,3)) SWIG_fail_arg("cproxy_create_downstream",3,"proxy_behavior_pool *");
   arg1 = (char *)lua_tostring(L, 1);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("cproxy_create_downstream",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_proxy_behavior_pool,0))){
     SWIG_fail_ptr("cproxy_create_downstream",3,SWIGTYPE_p_proxy_behavior_pool);
@@ -12825,22 +12005,17 @@ static int _wrap_multiget_entry_opaque_set(lua_State* L) {
   int SWIG_arg = 0;
   struct multiget_entry *arg1 = (struct multiget_entry *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("opaque",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("opaque",1,"struct multiget_entry *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("opaque",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("opaque",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_multiget_entry,0))){
     SWIG_fail_ptr("multiget_entry_opaque_set",1,SWIGTYPE_p_multiget_entry);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("multiget_entry_opaque_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->opaque = arg2;
   
   return SWIG_arg;
@@ -12865,13 +12040,8 @@ static int _wrap_multiget_entry_opaque_get(lua_State* L) {
     SWIG_fail_ptr("multiget_entry_opaque_get",1,SWIGTYPE_p_multiget_entry);
   }
   
-  result =  ((arg1)->opaque);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->opaque);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -12886,22 +12056,16 @@ static int _wrap_multiget_entry_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct multiget_entry *arg1 = (struct multiget_entry *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("hits",1,"struct multiget_entry *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_multiget_entry,0))){
     SWIG_fail_ptr("multiget_entry_hits_set",1,SWIGTYPE_p_multiget_entry);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("multiget_entry_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->hits = arg2;
   
   return SWIG_arg;
@@ -12926,13 +12090,8 @@ static int _wrap_multiget_entry_hits_get(lua_State* L) {
     SWIG_fail_ptr("multiget_entry_hits_get",1,SWIGTYPE_p_multiget_entry);
   }
   
-  result =  ((arg1)->hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -13631,22 +12790,17 @@ static int _wrap_mcache_start(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("mcache_start",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("mcache_start",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("mcache_start",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("mcache_start",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_start",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_start",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   mcache_start(arg1,arg2);
   
   return SWIG_arg;
@@ -13735,14 +12889,13 @@ static int _wrap_mcache_get(lua_State* L) {
   char *arg2 = (char *) 0 ;
   int arg3 ;
   uint32_t arg4 ;
-  uint32_t *argp4 ;
   void *result = 0 ;
   
   SWIG_check_num_args("mcache_get",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("mcache_get",1,"mcache *");
   if(!lua_isstring(L,2)) SWIG_fail_arg("mcache_get",2,"char *");
   if(!lua_isnumber(L,3)) SWIG_fail_arg("mcache_get",3,"int");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("mcache_get",4,"uint32_t");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("mcache_get",4,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_get",1,SWIGTYPE_p_mcache);
@@ -13750,12 +12903,8 @@ static int _wrap_mcache_get(lua_State* L) {
   
   arg2 = (char *)lua_tostring(L, 2);
   arg3 = (int)lua_tonumber(L, 3);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&argp4,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_get",4,SWIGTYPE_p_uint32_t);
-  }
-  arg4 = *argp4;
-  
+  SWIG_contract_assert((lua_tonumber(L,4)>=0),"number must not be negative")
+  arg4 = (uint32_t)lua_tonumber(L, 4);
   result = (void *)mcache_get(arg1,arg2,arg3,arg4);
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_void,0); SWIG_arg++; 
   return SWIG_arg;
@@ -13775,12 +12924,11 @@ static int _wrap_mcache_set(lua_State* L) {
   uint32_t arg3 ;
   bool arg4 ;
   bool arg5 ;
-  uint32_t *argp3 ;
   
   SWIG_check_num_args("mcache_set",5,5)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("mcache_set",1,"mcache *");
   if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("mcache_set",2,"void *");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("mcache_set",3,"uint32_t");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("mcache_set",3,"uint32_t");
   if(!lua_isboolean(L,4)) SWIG_fail_arg("mcache_set",4,"bool");
   if(!lua_isboolean(L,5)) SWIG_fail_arg("mcache_set",5,"bool");
   
@@ -13789,12 +12937,8 @@ static int _wrap_mcache_set(lua_State* L) {
   }
   
   arg2=(void *)SWIG_MustGetPtr(L,2,0,0,2,"mcache_set");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&argp3,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_set",3,SWIGTYPE_p_uint32_t);
-  }
-  arg3 = *argp3;
-  
+  SWIG_contract_assert((lua_tonumber(L,3)>=0),"number must not be negative")
+  arg3 = (uint32_t)lua_tonumber(L, 3);
   arg4 = (lua_toboolean(L, 4)!=0);
   arg5 = (lua_toboolean(L, 5)!=0);
   mcache_set(arg1,arg2,arg3,arg4,arg5);
@@ -13842,22 +12986,17 @@ static int _wrap_mcache_flush_all(lua_State* L) {
   int SWIG_arg = 0;
   mcache *arg1 = (mcache *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("mcache_flush_all",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("mcache_flush_all",1,"mcache *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("mcache_flush_all",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("mcache_flush_all",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_mcache,0))){
     SWIG_fail_ptr("mcache_flush_all",1,SWIGTYPE_p_mcache);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("mcache_flush_all",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   mcache_flush_all(arg1,arg2);
   
   return SWIG_arg;
@@ -13909,14 +13048,13 @@ static int _wrap_find_key_stats(lua_State* L) {
   char *arg2 = (char *) 0 ;
   int arg3 ;
   uint32_t arg4 ;
-  uint32_t *argp4 ;
   key_stats *result = 0 ;
   
   SWIG_check_num_args("find_key_stats",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("find_key_stats",1,"proxy_td *");
   if(!lua_isstring(L,2)) SWIG_fail_arg("find_key_stats",2,"char *");
   if(!lua_isnumber(L,3)) SWIG_fail_arg("find_key_stats",3,"int");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("find_key_stats",4,"uint32_t");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("find_key_stats",4,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_proxy_td,0))){
     SWIG_fail_ptr("find_key_stats",1,SWIGTYPE_p_proxy_td);
@@ -13924,12 +13062,8 @@ static int _wrap_find_key_stats(lua_State* L) {
   
   arg2 = (char *)lua_tostring(L, 2);
   arg3 = (int)lua_tonumber(L, 3);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&argp4,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("find_key_stats",4,SWIGTYPE_p_uint32_t);
-  }
-  arg4 = *argp4;
-  
+  SWIG_contract_assert((lua_tonumber(L,4)>=0),"number must not be negative")
+  arg4 = (uint32_t)lua_tonumber(L, 4);
   result = (key_stats *)find_key_stats(arg1,arg2,arg3,arg4);
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_key_stats,0); SWIG_arg++; 
   return SWIG_arg;
@@ -13955,13 +13089,12 @@ static int _wrap_touch_key_stats(lua_State* L) {
   int arg9 ;
   int arg10 ;
   int arg11 ;
-  uint32_t *argp4 ;
   
   SWIG_check_num_args("touch_key_stats",11,11)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("touch_key_stats",1,"proxy_td *");
   if(!lua_isstring(L,2)) SWIG_fail_arg("touch_key_stats",2,"char *");
   if(!lua_isnumber(L,3)) SWIG_fail_arg("touch_key_stats",3,"int");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("touch_key_stats",4,"uint32_t");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("touch_key_stats",4,"uint32_t");
   if(!lua_isnumber(L,5)) SWIG_fail_arg("touch_key_stats",5,"enum_stats_cmd_type");
   if(!lua_isnumber(L,6)) SWIG_fail_arg("touch_key_stats",6,"enum_stats_cmd");
   if(!lua_isnumber(L,7)) SWIG_fail_arg("touch_key_stats",7,"int");
@@ -13976,12 +13109,8 @@ static int _wrap_touch_key_stats(lua_State* L) {
   
   arg2 = (char *)lua_tostring(L, 2);
   arg3 = (int)lua_tonumber(L, 3);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&argp4,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("touch_key_stats",4,SWIGTYPE_p_uint32_t);
-  }
-  arg4 = *argp4;
-  
+  SWIG_contract_assert((lua_tonumber(L,4)>=0),"number must not be negative")
+  arg4 = (uint32_t)lua_tonumber(L, 4);
   arg5 = (enum_stats_cmd_type)(int)lua_tonumber(L, 5);
   arg6 = (enum_stats_cmd)(int)lua_tonumber(L, 6);
   arg7 = (int)lua_tonumber(L, 7);
@@ -14259,22 +13388,16 @@ static int _wrap_slab_stats_set_cmds_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("set_cmds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("set_cmds",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("set_cmds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("set_cmds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_set_cmds_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_set_cmds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->set_cmds = arg2;
   
   return SWIG_arg;
@@ -14299,13 +13422,8 @@ static int _wrap_slab_stats_set_cmds_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_set_cmds_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->set_cmds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->set_cmds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14320,22 +13438,16 @@ static int _wrap_slab_stats_get_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_hits",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_get_hits_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_get_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_hits = arg2;
   
   return SWIG_arg;
@@ -14360,13 +13472,8 @@ static int _wrap_slab_stats_get_hits_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_get_hits_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->get_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14381,22 +13488,16 @@ static int _wrap_slab_stats_delete_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("delete_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("delete_hits",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("delete_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("delete_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_delete_hits_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_delete_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->delete_hits = arg2;
   
   return SWIG_arg;
@@ -14421,13 +13522,8 @@ static int _wrap_slab_stats_delete_hits_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_delete_hits_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->delete_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->delete_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14442,22 +13538,16 @@ static int _wrap_slab_stats_cas_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("cas_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cas_hits",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cas_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cas_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_cas_hits_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_cas_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cas_hits = arg2;
   
   return SWIG_arg;
@@ -14482,13 +13572,8 @@ static int _wrap_slab_stats_cas_hits_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_cas_hits_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->cas_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->cas_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14503,22 +13588,16 @@ static int _wrap_slab_stats_cas_badval_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("cas_badval",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cas_badval",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cas_badval",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cas_badval",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_cas_badval_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_cas_badval_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cas_badval = arg2;
   
   return SWIG_arg;
@@ -14543,13 +13622,8 @@ static int _wrap_slab_stats_cas_badval_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_cas_badval_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->cas_badval);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->cas_badval);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14564,22 +13638,16 @@ static int _wrap_slab_stats_incr_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("incr_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("incr_hits",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("incr_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("incr_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_incr_hits_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_incr_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->incr_hits = arg2;
   
   return SWIG_arg;
@@ -14604,13 +13672,8 @@ static int _wrap_slab_stats_incr_hits_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_incr_hits_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->incr_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->incr_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14625,22 +13688,16 @@ static int _wrap_slab_stats_decr_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct slab_stats *arg1 = (struct slab_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("decr_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("decr_hits",1,"struct slab_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("decr_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("decr_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_slab_stats,0))){
     SWIG_fail_ptr("slab_stats_decr_hits_set",1,SWIGTYPE_p_slab_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("slab_stats_decr_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->decr_hits = arg2;
   
   return SWIG_arg;
@@ -14665,13 +13722,8 @@ static int _wrap_slab_stats_decr_hits_get(lua_State* L) {
     SWIG_fail_ptr("slab_stats_decr_hits_get",1,SWIGTYPE_p_slab_stats);
   }
   
-  result =  ((arg1)->decr_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->decr_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14785,22 +13837,16 @@ static int _wrap_thread_stats_get_cmds_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_cmds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_cmds",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_cmds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_cmds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_get_cmds_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_get_cmds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_cmds = arg2;
   
   return SWIG_arg;
@@ -14825,13 +13871,8 @@ static int _wrap_thread_stats_get_cmds_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_get_cmds_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->get_cmds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_cmds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14846,22 +13887,16 @@ static int _wrap_thread_stats_get_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_misses",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_get_misses_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_get_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_misses = arg2;
   
   return SWIG_arg;
@@ -14886,13 +13921,8 @@ static int _wrap_thread_stats_get_misses_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_get_misses_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->get_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14907,22 +13937,16 @@ static int _wrap_thread_stats_delete_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("delete_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("delete_misses",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("delete_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("delete_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_delete_misses_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_delete_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->delete_misses = arg2;
   
   return SWIG_arg;
@@ -14947,13 +13971,8 @@ static int _wrap_thread_stats_delete_misses_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_delete_misses_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->delete_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->delete_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -14968,22 +13987,16 @@ static int _wrap_thread_stats_incr_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("incr_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("incr_misses",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("incr_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("incr_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_incr_misses_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_incr_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->incr_misses = arg2;
   
   return SWIG_arg;
@@ -15008,13 +14021,8 @@ static int _wrap_thread_stats_incr_misses_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_incr_misses_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->incr_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->incr_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15029,22 +14037,16 @@ static int _wrap_thread_stats_decr_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("decr_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("decr_misses",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("decr_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("decr_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_decr_misses_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_decr_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->decr_misses = arg2;
   
   return SWIG_arg;
@@ -15069,13 +14071,8 @@ static int _wrap_thread_stats_decr_misses_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_decr_misses_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->decr_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->decr_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15090,22 +14087,16 @@ static int _wrap_thread_stats_cas_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("cas_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cas_misses",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cas_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cas_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_cas_misses_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_cas_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cas_misses = arg2;
   
   return SWIG_arg;
@@ -15130,13 +14121,8 @@ static int _wrap_thread_stats_cas_misses_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_cas_misses_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->cas_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->cas_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15151,22 +14137,16 @@ static int _wrap_thread_stats_bytes_read_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("bytes_read",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("bytes_read",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("bytes_read",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("bytes_read",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_bytes_read_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_bytes_read_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->bytes_read = arg2;
   
   return SWIG_arg;
@@ -15191,13 +14171,8 @@ static int _wrap_thread_stats_bytes_read_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_bytes_read_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->bytes_read);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->bytes_read);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15212,22 +14187,16 @@ static int _wrap_thread_stats_bytes_written_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("bytes_written",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("bytes_written",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("bytes_written",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("bytes_written",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_bytes_written_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_bytes_written_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->bytes_written = arg2;
   
   return SWIG_arg;
@@ -15252,13 +14221,8 @@ static int _wrap_thread_stats_bytes_written_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_bytes_written_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->bytes_written);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->bytes_written);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15273,22 +14237,16 @@ static int _wrap_thread_stats_flush_cmds_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("flush_cmds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("flush_cmds",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("flush_cmds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("flush_cmds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_flush_cmds_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_flush_cmds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->flush_cmds = arg2;
   
   return SWIG_arg;
@@ -15313,13 +14271,8 @@ static int _wrap_thread_stats_flush_cmds_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_flush_cmds_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->flush_cmds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->flush_cmds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15334,22 +14287,16 @@ static int _wrap_thread_stats_conn_yields_set(lua_State* L) {
   int SWIG_arg = 0;
   struct thread_stats *arg1 = (struct thread_stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("conn_yields",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("conn_yields",1,"struct thread_stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("conn_yields",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("conn_yields",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_thread_stats,0))){
     SWIG_fail_ptr("thread_stats_conn_yields_set",1,SWIGTYPE_p_thread_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("thread_stats_conn_yields_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->conn_yields = arg2;
   
   return SWIG_arg;
@@ -15374,13 +14321,8 @@ static int _wrap_thread_stats_conn_yields_get(lua_State* L) {
     SWIG_fail_ptr("thread_stats_conn_yields_get",1,SWIGTYPE_p_thread_stats);
   }
   
-  result =  ((arg1)->conn_yields);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->conn_yields);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15659,22 +14601,16 @@ static int _wrap_stats_curr_bytes_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("curr_bytes",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("curr_bytes",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("curr_bytes",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("curr_bytes",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_curr_bytes_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_curr_bytes_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->curr_bytes = arg2;
   
   return SWIG_arg;
@@ -15699,13 +14635,8 @@ static int _wrap_stats_curr_bytes_get(lua_State* L) {
     SWIG_fail_ptr("stats_curr_bytes_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->curr_bytes);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->curr_bytes);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15873,22 +14804,16 @@ static int _wrap_stats_get_cmds_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_cmds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_cmds",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_cmds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_cmds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_get_cmds_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_get_cmds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_cmds = arg2;
   
   return SWIG_arg;
@@ -15913,13 +14838,8 @@ static int _wrap_stats_get_cmds_get(lua_State* L) {
     SWIG_fail_ptr("stats_get_cmds_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->get_cmds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_cmds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15934,22 +14854,16 @@ static int _wrap_stats_set_cmds_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("set_cmds",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("set_cmds",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("set_cmds",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("set_cmds",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_set_cmds_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_set_cmds_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->set_cmds = arg2;
   
   return SWIG_arg;
@@ -15974,13 +14888,8 @@ static int _wrap_stats_set_cmds_get(lua_State* L) {
     SWIG_fail_ptr("stats_set_cmds_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->set_cmds);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->set_cmds);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -15995,22 +14904,16 @@ static int _wrap_stats_get_hits_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_hits",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_hits",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_hits",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_hits",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_get_hits_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_get_hits_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_hits = arg2;
   
   return SWIG_arg;
@@ -16035,13 +14938,8 @@ static int _wrap_stats_get_hits_get(lua_State* L) {
     SWIG_fail_ptr("stats_get_hits_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->get_hits);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_hits);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -16056,22 +14954,16 @@ static int _wrap_stats_get_misses_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("get_misses",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("get_misses",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("get_misses",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("get_misses",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_get_misses_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_get_misses_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->get_misses = arg2;
   
   return SWIG_arg;
@@ -16096,13 +14988,8 @@ static int _wrap_stats_get_misses_get(lua_State* L) {
     SWIG_fail_ptr("stats_get_misses_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->get_misses);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->get_misses);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -16117,22 +15004,16 @@ static int _wrap_stats_evictions_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("evictions",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("evictions",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("evictions",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("evictions",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_evictions_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_evictions_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->evictions = arg2;
   
   return SWIG_arg;
@@ -16157,13 +15038,8 @@ static int _wrap_stats_evictions_get(lua_State* L) {
     SWIG_fail_ptr("stats_evictions_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->evictions);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->evictions);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -16289,22 +15165,16 @@ static int _wrap_stats_listen_disabled_num_set(lua_State* L) {
   int SWIG_arg = 0;
   struct stats *arg1 = (struct stats *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("listen_disabled_num",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("listen_disabled_num",1,"struct stats *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("listen_disabled_num",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("listen_disabled_num",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_stats,0))){
     SWIG_fail_ptr("stats_listen_disabled_num_set",1,SWIGTYPE_p_stats);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("stats_listen_disabled_num_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->listen_disabled_num = arg2;
   
   return SWIG_arg;
@@ -16329,13 +15199,8 @@ static int _wrap_stats_listen_disabled_num_get(lua_State* L) {
     SWIG_fail_ptr("stats_listen_disabled_num_get",1,SWIGTYPE_p_stats);
   }
   
-  result =  ((arg1)->listen_disabled_num);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->listen_disabled_num);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -21031,22 +19896,16 @@ static int _wrap_conn_cas_set(lua_State* L) {
   int SWIG_arg = 0;
   struct conn *arg1 = (struct conn *) 0 ;
   uint64_t arg2 ;
-  uint64_t *argp2 ;
   
   SWIG_check_num_args("cas",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cas",1,"struct conn *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cas",2,"uint64_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cas",2,"uint64_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_conn,0))){
     SWIG_fail_ptr("conn_cas_set",1,SWIGTYPE_p_conn);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("conn_cas_set",2,SWIGTYPE_p_uint64_t);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (uint64_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cas = arg2;
   
   return SWIG_arg;
@@ -21071,13 +19930,8 @@ static int _wrap_conn_cas_get(lua_State* L) {
     SWIG_fail_ptr("conn_cas_get",1,SWIGTYPE_p_conn);
   }
   
-  result =  ((arg1)->cas);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  result = (uint64_t) ((arg1)->cas);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -21573,22 +20427,17 @@ static int _wrap_conn_cmd_start_time_set(lua_State* L) {
   int SWIG_arg = 0;
   struct conn *arg1 = (struct conn *) 0 ;
   uint32_t arg2 ;
-  uint32_t *argp2 ;
   
   SWIG_check_num_args("cmd_start_time",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("cmd_start_time",1,"struct conn *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("cmd_start_time",2,"uint32_t");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("cmd_start_time",2,"uint32_t");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_conn,0))){
     SWIG_fail_ptr("conn_cmd_start_time_set",1,SWIGTYPE_p_conn);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_uint32_t,0))){
-    SWIG_fail_ptr("conn_cmd_start_time_set",2,SWIGTYPE_p_uint32_t);
-  }
-  arg2 = *argp2;
-  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative")
+  arg2 = (uint32_t)lua_tonumber(L, 2);
   if (arg1) (arg1)->cmd_start_time = arg2;
   
   return SWIG_arg;
@@ -21613,13 +20462,8 @@ static int _wrap_conn_cmd_start_time_get(lua_State* L) {
     SWIG_fail_ptr("conn_cmd_start_time_get",1,SWIGTYPE_p_conn);
   }
   
-  result =  ((arg1)->cmd_start_time);
-  {
-    uint32_t * resultptr;
-    resultptr = (uint32_t *) malloc(sizeof(uint32_t));
-    memmove(resultptr, &result, sizeof(uint32_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint32_t,1); SWIG_arg++;
-  }
+  result = (uint32_t) ((arg1)->cmd_start_time);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -22740,24 +21584,13 @@ fail:
 static int _wrap_mc_swap64(lua_State* L) {
   int SWIG_arg = 0;
   uint64_t arg1 ;
-  uint64_t *argp1 ;
   uint64_t result;
   
   SWIG_check_num_args("mc_swap64",1,1)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("mc_swap64",1,"uint64_t");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p_uint64_t,0))){
-    SWIG_fail_ptr("mc_swap64",1,SWIGTYPE_p_uint64_t);
-  }
-  arg1 = *argp1;
-  
-  result = mc_swap64(arg1);
-  {
-    uint64_t * resultptr;
-    resultptr = (uint64_t *) malloc(sizeof(uint64_t));
-    memmove(resultptr, &result, sizeof(uint64_t));
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_uint64_t,1); SWIG_arg++;
-  }
+  if(!lua_isnumber(L,1)) SWIG_fail_arg("mc_swap64",1,"uint64_t");
+  arg1 = (uint64_t)lua_tonumber(L, 1);
+  result = (uint64_t)mc_swap64(arg1);
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -23547,8 +22380,8 @@ static int _wrap_item_stats(lua_State* L) {
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("item_stats",1,"ADD_STAT");
   if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("item_stats",2,"void *");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,0))){
-    SWIG_fail_ptr("item_stats",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,0))){
+    SWIG_fail_ptr("item_stats",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void);
   }
   
   arg2=(void *)SWIG_MustGetPtr(L,2,0,0,2,"item_stats");
@@ -23573,8 +22406,8 @@ static int _wrap_item_stats_sizes(lua_State* L) {
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("item_stats_sizes",1,"ADD_STAT");
   if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("item_stats_sizes",2,"void *");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,0))){
-    SWIG_fail_ptr("item_stats_sizes",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,0))){
+    SWIG_fail_ptr("item_stats_sizes",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void);
   }
   
   arg2=(void *)SWIG_MustGetPtr(L,2,0,0,2,"item_stats_sizes");
@@ -23752,8 +22585,8 @@ static int _wrap_append_stat(lua_State* L) {
   if(!lua_isstring(L,4)) SWIG_fail_arg("append_stat",4,"char const *");
   arg1 = (char *)lua_tostring(L, 1);
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,0))){
-    SWIG_fail_ptr("append_stat",2,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,0))){
+    SWIG_fail_ptr("append_stat",2,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void);
   }
   
   arg3=(void *)SWIG_MustGetPtr(L,3,0,0,3,"append_stat");
@@ -23779,8 +22612,8 @@ static int _wrap_server_stats(lua_State* L) {
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("server_stats",1,"ADD_STAT");
   if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("server_stats",2,"void *");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,0))){
-    SWIG_fail_ptr("server_stats",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,0))){
+    SWIG_fail_ptr("server_stats",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void);
   }
   
   arg2=(void *)SWIG_MustGetPtr(L,2,0,0,2,"server_stats");
@@ -23805,8 +22638,8 @@ static int _wrap_process_stat_settings(lua_State* L) {
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("process_stat_settings",1,"ADD_STAT");
   if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("process_stat_settings",2,"void *");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,0))){
-    SWIG_fail_ptr("process_stat_settings",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,0))){
+    SWIG_fail_ptr("process_stat_settings",1,SWIGTYPE_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void);
   }
   
   arg2=(void *)SWIG_MustGetPtr(L,2,0,0,2,"process_stat_settings");
@@ -24160,7 +22993,7 @@ static swig_type_info _swigt__p_enum_stats_cmd = {"_p_enum_stats_cmd", "enum enu
 static swig_type_info _swigt__p_enum_stats_cmd_type = {"_p_enum_stats_cmd_type", "enum enum_stats_cmd_type *|enum_stats_cmd_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_event = {"_p_event", "struct event *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_event_base = {"_p_event_base", "struct event_base *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void = {"_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void", "ADD_STAT|void (*)(char const *,uint16_t const,char const *,uint32_t const,void const *)", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void = {"_p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void", "ADD_STAT|void (*)(char const *,uint16_t const,char const *,unsigned int const,void const *)", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void = {"_p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void", "void (*)(void const *,char const *,char const *,char const *)", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_p_q_const__void_p_void__void = {"_p_f_p_q_const__void_p_void__void", "void (*)(void const *,void *)|mcache_traversal_func", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_p_struct_conn__int = {"_p_f_p_struct_conn__int", "int (*)(struct conn *)|int (*)(conn *)", 0, 0, (void*)0, 0};
@@ -24204,11 +23037,10 @@ static swig_type_info _swigt__p_time_t = {"_p_time_t", "time_t *", 0, 0, (void*)
 static swig_type_info _swigt__p_timeval = {"_p_timeval", "struct timeval *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_token_s = {"_p_token_s", "struct token_s *|token_t *", 0, 0, (void*)&_wrap_class_token_t, 0};
 static swig_type_info _swigt__p_uint16_t = {"_p_uint16_t", "uint16_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_uint32_t = {"_p_uint32_t", "uint32_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_uint64_t = {"_p_uint64_t", "uint64_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_uint8_t = {"_p_uint8_t", "uint8_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_unsigned_char = {"_p_unsigned_char", "unsigned char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "unsigned int *|rel_time_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "uint32_t *|unsigned int *|rel_time_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "uint64_t *|unsigned long long *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_void = {"_p_void", "void *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_work_queue = {"_p_work_queue", "work_queue *", 0, 0, (void*)0, 0};
 
@@ -24229,7 +23061,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_enum_stats_cmd_type,
   &_swigt__p_event,
   &_swigt__p_event_base,
-  &_swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,
+  &_swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,
   &_swigt__p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void,
   &_swigt__p_f_p_q_const__void_p_void__void,
   &_swigt__p_f_p_struct_conn__int,
@@ -24273,11 +23105,10 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_timeval,
   &_swigt__p_token_s,
   &_swigt__p_uint16_t,
-  &_swigt__p_uint32_t,
-  &_swigt__p_uint64_t,
   &_swigt__p_uint8_t,
   &_swigt__p_unsigned_char,
   &_swigt__p_unsigned_int,
+  &_swigt__p_unsigned_long_long,
   &_swigt__p_void,
   &_swigt__p_work_queue,
 };
@@ -24298,7 +23129,7 @@ static swig_cast_info _swigc__p_enum_stats_cmd[] = {  {&_swigt__p_enum_stats_cmd
 static swig_cast_info _swigc__p_enum_stats_cmd_type[] = {  {&_swigt__p_enum_stats_cmd_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_event[] = {  {&_swigt__p_event, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_event_base[] = {  {&_swigt__p_event_base, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void[] = {  {&_swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void[] = {  {&_swigt__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void[] = {  {&_swigt__p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_p_q_const__void_p_void__void[] = {  {&_swigt__p_f_p_q_const__void_p_void__void, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_p_struct_conn__int[] = {  {&_swigt__p_f_p_struct_conn__int, 0, 0, 0},{0, 0, 0, 0}};
@@ -24342,11 +23173,10 @@ static swig_cast_info _swigc__p_time_t[] = {  {&_swigt__p_time_t, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_timeval[] = {  {&_swigt__p_timeval, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_token_s[] = {  {&_swigt__p_token_s, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_uint16_t[] = {  {&_swigt__p_uint16_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_uint32_t[] = {  {&_swigt__p_uint32_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_uint64_t[] = {  {&_swigt__p_uint64_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_uint8_t[] = {  {&_swigt__p_uint8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_char[] = {  {&_swigt__p_unsigned_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_void[] = {  {&_swigt__p_void, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_work_queue[] = {  {&_swigt__p_work_queue, 0, 0, 0},{0, 0, 0, 0}};
 
@@ -24367,7 +23197,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_enum_stats_cmd_type,
   _swigc__p_event,
   _swigc__p_event_base,
-  _swigc__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__uint32_t_p_q_const__void__void,
+  _swigc__p_f_p_q_const__char_q_const__uint16_t_p_q_const__char_q_const__unsigned_int_p_q_const__void__void,
   _swigc__p_f_p_q_const__void_p_q_const__char_p_q_const__char_p_q_const__char__void,
   _swigc__p_f_p_q_const__void_p_void__void,
   _swigc__p_f_p_struct_conn__int,
@@ -24411,11 +23241,10 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_timeval,
   _swigc__p_token_s,
   _swigc__p_uint16_t,
-  _swigc__p_uint32_t,
-  _swigc__p_uint64_t,
   _swigc__p_uint8_t,
   _swigc__p_unsigned_char,
   _swigc__p_unsigned_int,
+  _swigc__p_unsigned_long_long,
   _swigc__p_void,
   _swigc__p_work_queue,
 };
