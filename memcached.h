@@ -353,6 +353,14 @@ struct bin_cmd {
     bin_cmd *next;
 };
 
+/**
+ * The structure representing a connection into memcached.
+ */
+typedef struct conn conn;
+typedef struct conn_funcs conn_funcs;
+
+#define PENDING_WRITES_MAX 16
+
 typedef struct {
     pthread_t thread_id;        /* unique ID of this thread */
     struct event_base *base;    /* libevent handle this thread uses */
@@ -364,13 +372,9 @@ typedef struct {
     cache_t *suffix_cache;      /* suffix cache */
     work_queue *work_queue;
     genhash_t *conn_hash;       /* per thread connection hash, keyed by host_ident */
+    int pending_writes_count;
+    conn *pending_writes[PENDING_WRITES_MAX];
 } LIBEVENT_THREAD;
-
-/**
- * The structure representing a connection into memcached.
- */
-typedef struct conn conn;
-typedef struct conn_funcs conn_funcs;
 
 struct conn_funcs {
     /* Function pointers so that drive_machine loop is reusable. */
@@ -388,6 +392,13 @@ struct conn_funcs {
     /* PROTOCOL_BINARY_REQ/RES */
     uint8_t conn_binary_command_magic;
 };
+
+/* According to libevent docs flags starting from 0x1000 can be used
+ * by libevent users. We use this flag to mark that has EV_WRITE not
+ * propagated to kernel via per-thread pending_writes queue. This is
+ * done so that we first try to do actual writes before waiting for
+ * socket write-ability */
+#define SKIPPED_EV_WRITE 0x1000
 
 struct conn {
     int    sfd;

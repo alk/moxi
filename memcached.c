@@ -3238,6 +3238,16 @@ bool update_event(conn *c, const int new_flags) {
 
 bool update_event_timed(conn *c, const int new_flags, struct timeval *timeout) {
     assert(c != NULL);
+    LIBEVENT_THREAD *thread = c->thread;
+
+    if (thread->thread_id == pthread_self()
+        && (new_flags & EV_WRITE) && (thread->pending_writes_count < PENDING_WRITES_MAX)
+        && !(c->ev_flags & SKIPPED_EV_WRITE)) {
+
+        c->ev_flags |= SKIPPED_EV_WRITE;
+        thread->pending_writes[thread->pending_writes_count++] = c;
+        return true;
+    }
 
     struct event_base *base = c->event.ev_base;
     if (c->ev_flags == new_flags && timeout == NULL)
@@ -3693,6 +3703,7 @@ void add_bytes_read(conn *c, int bytes_read) {
 
 void event_handler(const int fd, const short which, void *arg) {
     conn *c;
+    LIBEVENT_THREAD *thread;
 
     c = (conn *)arg;
     assert(c != NULL);
@@ -3708,6 +3719,12 @@ void event_handler(const int fd, const short which, void *arg) {
     }
 
     drive_machine(c);
+
+    thread = c->thread;
+
+    while (thread->pending_writes_count > 0) {
+        drive_machine(thread->pending_writes[--thread->pending_writes_count]);
+    }
 
     /* wait for next event */
     return;
