@@ -3214,8 +3214,23 @@ static enum try_read_result try_read_network(conn *c) {
     return gotdata;
 }
 
+#define SKIPPED_EV_WRITE 0x1000
+
+#define PENDING_WRITES_MAX 16
+
+__thread int pending_writes_count;
+__thread conn *pending_writes[PENDING_WRITES_MAX];
+
 bool update_event(conn *c, const int new_flags) {
     assert(c != NULL);
+
+    if ((new_flags & EV_WRITE) && (pending_writes_count < PENDING_WRITES_MAX)) {
+        if (!(c->ev_flags & SKIPPED_EV_WRITE)) {
+            c->ev_flags |= SKIPPED_EV_WRITE;
+            pending_writes[pending_writes_count++] = c;
+            return true;
+        }
+    }
 
     struct event_base *base = c->event.ev_base;
     if (c->ev_flags == new_flags)
@@ -3671,6 +3686,10 @@ void event_handler(const int fd, const short which, void *arg) {
     }
 
     drive_machine(c);
+
+    while (pending_writes_count > 0) {
+        drive_machine(pending_writes[--pending_writes_count]);
+    }
 
     /* wait for next event */
     return;
