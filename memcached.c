@@ -3723,7 +3723,7 @@ void event_handler(const int fd, const short which, void *arg) {
     thread = c->thread;
 
     while (thread->pending_writes_count > 0) {
-        drive_machine(thread->pending_writes[--thread->pending_writes_count]);
+        drive_machine(thread->pending_writes[--(thread->pending_writes_count)]);
     }
 
     /* wait for next event */
