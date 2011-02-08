@@ -19,7 +19,7 @@ end
 echo starting slow memcached simulant 11277
 
 ../labrea/labrea /tmp/slow-node.lua \
-  ./moxi -d -P /tmp/moxi-slow-node-test-memcached0.pid -p 11277
+  ./moxi -u `whoami` -d -P /tmp/moxi-slow-node-test-memcached0.pid -p 11277
 
 sleep 1
 
@@ -27,7 +27,7 @@ echo -e "set a 0 0 1\r\na\r" | nc 127.0.0.1 11277
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-slow-node-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-slow-node-test-moxi.pid \
   -z 11266=127.0.0.1:11277 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_conn_queue_timeout=100,wait_queue_timeout=0
 

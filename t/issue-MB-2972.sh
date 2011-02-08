@@ -2,7 +2,7 @@
 
 echo starting memcached simulant
 
-./moxi -d -P /tmp/moxi-2972-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-2972-test-memcached.pid -p 11277
 
 ( cat << EOF
 HTTP/1.0 200 OK
@@ -26,7 +26,7 @@ EOF
 
 echo starting moxi
 
-./moxi -d -P /tmp/moxi-2972-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-2972-test-moxi.pid \
   -z http://127.0.0.1:22100/test \
   -Z port_listen=11266,downstream_conn_max=1,downstream_max=0,downstream_timeout=300,wait_queue_timeout=300,downstream_conn_queue_timeout=300,connect_timeout=300,auth_timeout=300
 
@@ -76,7 +76,7 @@ EOF
 
 echo starting moxi
 
-./moxi -d -P /tmp/moxi-2972-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-2972-test-moxi.pid \
   -z http://127.0.0.1:22100/test \
   -Z port_listen=11266,downstream_conn_max=1,downstream_max=0,downstream_timeout=300,wait_queue_timeout=300,downstream_conn_queue_timeout=300,connect_timeout=300,auth_timeout=300
 
@@ -97,7 +97,7 @@ echo ----------------------------------
 
 echo starting moxi
 
-./moxi -d -P /tmp/moxi-2972-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-2972-test-moxi.pid \
   -z 11266=127.0.0.1:11277 \
   -Z port_listen=11266,downstream_conn_max=1,downstream_max=0,downstream_timeout=300,wait_queue_timeout=300,downstream_conn_queue_timeout=300,connect_timeout=300,auth_timeout=300
 

@@ -17,7 +17,7 @@ EOF
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3113-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3113-test-moxi.pid \
   -z http://127.0.0.1:22100/saslBucketsStreamingSimulant -t 1 \
   -Z default_bucket_name=default,port_listen=11266
 

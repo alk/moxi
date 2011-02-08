@@ -9,13 +9,13 @@ echo starting moxi
 # configuration, we want to cause the main thread to (incorrectly)
 # hang for 30 seconds (before the fix).
 
-./moxi -d -P /tmp/moxi-2811-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-2811-test-moxi.pid \
   -z http://127.0.0.1:22100/test \
   -Z port_listen=11266,downstream_conn_max=1,downstream_max=0,downstream_timeout=30000,wait_queue_timeout=30000,downstream_conn_queue_timeout=30000,connect_timeout=30000,auth_timeout=30000
 
 echo starting memcached simulant
 
-./moxi -d -P /tmp/moxi-2811-test-memcached.pid -p 11277
+./moxi -u `whoami` -d -P /tmp/moxi-2811-test-memcached.pid -p 11277
 
 # Control our stdout at this point, as it goes to nc -l.
 # First, stream to moxi one vbucket config.

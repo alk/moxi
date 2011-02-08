@@ -4,11 +4,11 @@ ret=0
 
 echo starting memcached simulant at 11277
 
-./moxi -d -P /tmp/moxi-2980-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-2980-test-memcached.pid -p 11277
 
 echo starting moxi at 11266
 
-./moxi -d -P /tmp/moxi-2980-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-2980-test-moxi.pid \
   -z 11266=127.0.0.1:11277 \
   -Z downstream_protocol=ascii,port_listen=11266,front_cache_lifespan=3000,front_cache_max=1000,front_cache_spec=yes,front_cache_unspec=no,cycle=100
 

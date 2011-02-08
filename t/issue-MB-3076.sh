@@ -6,7 +6,7 @@ echo STATS testing ------------------------------
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
@@ -22,7 +22,7 @@ fi
 
 echo starting memcached simulant 11277...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
 
 sleep 1
 
@@ -38,7 +38,7 @@ kill `cat /tmp/moxi-3076-test-memcached.pid`
 
 echo starting memcached simulant 11288...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
 
 sleep 1
 
@@ -54,13 +54,13 @@ killall moxi
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
 echo starting memcached simulant 11277...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
 
 sleep 1
 
@@ -76,13 +76,13 @@ killall moxi
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
 echo starting memcached simulant 11288...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
 
 sleep 1
 
@@ -100,7 +100,7 @@ echo multiget testing ------------------------------
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
@@ -124,7 +124,7 @@ fi
 
 echo starting memcached simulant 11277...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
 sleep 1
 echo -e "set a 0 0 1\r\na\r" | nc 127.0.0.1 11277
 echo -e "set x 0 0 1\r\nb\r" | nc 127.0.0.1 11277
@@ -150,7 +150,7 @@ kill `cat /tmp/moxi-3076-test-memcached.pid`
 
 echo starting memcached simulant 11288...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
 sleep 1
 echo -e "set a 0 0 1\r\nA\r" | nc 127.0.0.1 11288
 echo -e "set x 0 0 1\r\nB\r" | nc 127.0.0.1 11288
@@ -175,13 +175,13 @@ killall moxi
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
 echo starting memcached simulant 11277...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11277
 sleep 1
 echo -e "set a 0 0 1\r\na\r" | nc 127.0.0.1 11277
 echo -e "set x 0 0 1\r\nb\r" | nc 127.0.0.1 11277
@@ -206,13 +206,13 @@ killall moxi
 
 echo starting moxi...
 
-./moxi -d -P /tmp/moxi-3076-test-moxi.pid \
+./moxi -u `whoami` -d -P /tmp/moxi-3076-test-moxi.pid \
   -z 11266=127.0.0.1:11277,127.0.0.1:11288 -t 1 \
   -Z downstream_conn_max=1,downstream_max=0,downstream_timeout=100,wait_queue_timeout=100
 
 echo starting memcached simulant 11288...
 
-./moxi -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
+./moxi -u `whoami`  -d -P /tmp/moxi-3076-test-memcached.pid -p 11288
 sleep 1
 echo -e "set a 0 0 1\r\nA\r" | nc 127.0.0.1 11288
 echo -e "set x 0 0 1\r\nB\r" | nc 127.0.0.1 11288
