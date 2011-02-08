@@ -4778,7 +4778,7 @@ int main (int argc, char **argv) {
 
         if ((getrlimit(RLIMIT_CORE, &rlim) != 0) || rlim.rlim_cur == 0) {
             moxi_log_write("failed to ensure corefile creation\n");
-            exit(EX_OSERR);
+            /* exit(EX_OSERR); */
         }
     }
 
@@ -4789,7 +4789,7 @@ int main (int argc, char **argv) {
 
     if (getrlimit(RLIMIT_NOFILE, &rlim) != 0) {
         moxi_log_write("failed to getrlimit number of files\n");
-        exit(EX_OSERR);
+        /* exit(EX_OSERR); */
     } else {
         int maxfiles = settings.maxconns;
         if ((int)rlim.rlim_cur < maxfiles)
@@ -4798,7 +4798,7 @@ int main (int argc, char **argv) {
             rlim.rlim_max = rlim.rlim_cur;
         if (setrlimit(RLIMIT_NOFILE, &rlim) != 0) {
             moxi_log_write("failed to set rlimit for open files. Try running as root or requesting smaller maxconns value.\n");
-            exit(EX_OSERR);
+            /* exit(EX_OSERR); */
         }
     }
 #endif
